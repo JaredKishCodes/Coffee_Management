@@ -3,6 +3,7 @@ using CoffeeManagementSystem.Application.DTOs.CoffeeInventory;
 using CoffeeManagementSystem.Application.DTOs.Order;
 using CoffeeManagementSystem.Application.Interfaces;
 using CoffeeManagementSystem.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +19,7 @@ namespace CoffeeManagementSystem.API.Controllers
         {
             _orderService = orderService;
         }
-
+        [Authorize(Roles = "Admin,Customer,Staff")]
         [HttpGet("GetAllOrders")]
         public async Task<ActionResult<IEnumerable<ApiResponse<OrderDto>>>> GetAllOrdersAsync()
         {
@@ -40,7 +41,7 @@ namespace CoffeeManagementSystem.API.Controllers
                 Data = orders
             });
         }
-
+        [Authorize(Roles = "Admin,Customer,Staff")]
         [HttpGet("GetOrderById/{id}")]
         public async Task<ActionResult<ApiResponse<OrderDto>>> GetOrderByIdAsync(int id)
         {
@@ -62,7 +63,7 @@ namespace CoffeeManagementSystem.API.Controllers
                 Data = order
             });
         }
-
+        [Authorize(Roles = "Admin,Customer,Staff")]
         [HttpPost("AddOrder")]
         public async Task<ActionResult<ApiResponse<OrderDto>>> AddOrderAsync([FromBody] CreateOrderDto createOrderDto)
         {
@@ -95,7 +96,7 @@ namespace CoffeeManagementSystem.API.Controllers
                 });
 
         }
-
+        [Authorize(Roles = "Admin,Customer,Staff")]
         [HttpPut("UpdateOrder/{id}")]
         public async Task<ActionResult<ApiResponse<OrderDto>>> UpdateOrderAsync(int id, [FromBody] CreateOrderDto updateOrderDto)
         {
@@ -126,7 +127,7 @@ namespace CoffeeManagementSystem.API.Controllers
                 Data = updatedOrder
             });
         }
-
+        [Authorize(Roles = "Admin,Customer,Staff")]
         [HttpDelete("DeleteOrder/{id}")]
         public async Task<ActionResult<ApiResponse<OrderDto>>> DeleteOrder(int id)
         {

@@ -3,6 +3,7 @@ using CoffeeManagementSystem.Application.DTOs.Coffee;
 using CoffeeManagementSystem.Application.DTOs.CoffeeCategory;
 using CoffeeManagementSystem.Application.Interfaces;
 using CoffeeManagementSystem.Application.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +19,7 @@ namespace CoffeeManagementSystem.API.Controllers
         {
             _coffeeCategoryService = coffeeCategoryService;
         }
-
+        [Authorize(Roles = "Admin,Customer,Staff")]
         [HttpGet("GetAllCoffeeCategories")]
         public async Task<ActionResult<ApiResponse<IEnumerable<AllCategoriesDto>>>> GetAllCoffeeCategoriesAsync()
         {
@@ -39,7 +40,7 @@ namespace CoffeeManagementSystem.API.Controllers
                 Data = categories
             });
         }
-
+        [Authorize(Roles = "Admin,Customer,Staff")]
         [HttpGet("GetCoffeeCategoryById/{id}")]
         public async Task<ActionResult<ApiResponse<AllCategoriesDto>>> GetCoffeeCategoryByIdAsync(int id)
         {
@@ -61,7 +62,7 @@ namespace CoffeeManagementSystem.API.Controllers
                 Data = category
             });
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost("AddCoffeeCategory")]
         public async Task<ActionResult<ApiResponse<AllCategoriesDto>>> AddCoffeeCategoryAsync([FromBody] CoffeeCategoryReq coffeeCategoryReq)
         {
@@ -87,6 +88,7 @@ namespace CoffeeManagementSystem.API.Controllers
                 });
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("UpdateCoffeeCategory/{id}")]
         public async Task<ActionResult<ApiResponse<AllCategoriesDto>>> UpdateCoffeeCategoryAsync(int id, [FromBody] CoffeeCategoryReq coffeeCategoryReq)
         {
@@ -121,6 +123,7 @@ namespace CoffeeManagementSystem.API.Controllers
                 });
             }
         }
+        [Authorize(Roles = "Admin")]
         [HttpDelete("DeleteCoffeeCategory/{id}")]
         public async Task<ActionResult<ApiResponse<AllCategoriesDto>>> DeleteCoffeeCategoryAsync(int id)
         {

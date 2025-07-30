@@ -2,6 +2,7 @@
 using CoffeeManagementSystem.Application.DTOs.Coffee;
 using CoffeeManagementSystem.Application.Interfaces;
 using CoffeeManagementSystem.Application.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +18,7 @@ namespace CoffeeManagementSystem.API.Controllers
         {
             _coffeeService = coffeeService;
         }
-
+        [Authorize(Roles = "Admin,Customer,Staff")]
         [HttpGet("GetAllCoffees")]
         public async Task<ActionResult<ApiResponse<IEnumerable<CoffeeResponse>>>> GetAllCoffeeItems()
         {
@@ -40,7 +41,7 @@ namespace CoffeeManagementSystem.API.Controllers
                 Data = items
             });
         }
-
+        [Authorize(Roles = "Admin,Customer,Staff")]
         [HttpGet("{id}")]
         public async Task<ActionResult<ApiResponse<CoffeeResponse>>> GetCoffeeItemById(int id)
         {
@@ -56,7 +57,7 @@ namespace CoffeeManagementSystem.API.Controllers
                 Data = coffeeItem,
             });
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<ApiResponse<CoffeeResponse>>> AddCoffeeItem([FromBody] CoffeeRequest coffeeRequest)
         {
@@ -79,7 +80,7 @@ namespace CoffeeManagementSystem.API.Controllers
                     Data = newCoffee,
                 });
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<ActionResult<ApiResponse<CoffeeResponse>>> UpdateCoffeeItem(int id, [FromBody] CoffeeRequest coffeeRequest)
         {
@@ -105,7 +106,7 @@ namespace CoffeeManagementSystem.API.Controllers
                 Data = updatedCoffee,
             });
         }
-
+        [Authorize(Roles = "Admin,Customer,Staff")]
         [HttpGet("GetCoffeesByCategory")]
         public async Task<ActionResult<ApiResponse<IEnumerable<CoffeeResponse>>>> GetCoffeeItemsByCategory(int categoryId)
         {
@@ -129,7 +130,7 @@ namespace CoffeeManagementSystem.API.Controllers
             });
 
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<ApiResponse<CoffeeResponse>>> DeleteCoffeeItem(int id)
         {

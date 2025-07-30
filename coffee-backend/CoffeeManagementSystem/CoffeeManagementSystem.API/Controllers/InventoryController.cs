@@ -2,6 +2,7 @@
 using CoffeeManagementSystem.Application.DTOs.Coffee;
 using CoffeeManagementSystem.Application.DTOs.CoffeeInventory;
 using CoffeeManagementSystem.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,8 @@ namespace CoffeeManagementSystem.API.Controllers
         {
             _coffeeInventoryService = coffeeInventoryService;
         }
+
+        [Authorize(Roles = "Admin,Staff")]
         [HttpGet("GetInventoryByCategory")] 
         public async Task<ActionResult<IEnumerable<ApiResponse<CoffeeInventoryDto>>>> GetInventoryByCategoryAsync(int categoryId)
         {
@@ -46,7 +49,7 @@ namespace CoffeeManagementSystem.API.Controllers
                 Data = inventory
             });
         }
-
+        [Authorize(Roles = "Admin,Staff")]
         [HttpPut("UpdateStockAsync/{id}")]
         public async Task<ActionResult<ApiResponse<CoffeeInventoryDto>>> UpdateStockAsync(int id,[FromBody] UpdateCoffeeStockRequest updateCoffeeStockRequest)
         {
@@ -76,7 +79,7 @@ namespace CoffeeManagementSystem.API.Controllers
                 Data = updatedInventory
             });
         }
-
+        [Authorize(Roles = "Admin,Staff")]
         [HttpGet("GetInventoryById/{id}")]
         public async Task<ActionResult<ApiResponse<CoffeeInventoryDto>>> GetInventoryByIdAsync(int id)
         {
@@ -106,7 +109,7 @@ namespace CoffeeManagementSystem.API.Controllers
                 Data = inventory
             });
         }
-
+        [Authorize(Roles = "Admin,Staff")]
         [HttpGet("GetAllInventory")]
         public async Task<ActionResult<ApiResponse<CoffeeInventoryDto>>> GetAllInventoryAsync()
         {
