@@ -1,0 +1,32 @@
+
+
+<div *ngIf="!showLogin"  class="hero min-h-screen" style="background-image: url('https://wallpaperaccess.com/full/9524787.jpg');">
+  <div class="hero-overlay"></div>
+  <div class="hero-content text-neutral-content text-center">
+    <div class="max-w-md">
+      <h1 class="mb-5 text-5xl font-bold">Welcome to My Coffee Shop!</h1>
+      <p class="mb-5">
+        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
+        quasi. In deleniti eaque aut repudiandae et a id nisi.
+      </p>
+      <button class="btn btn-primary"  (click)="showLogin = true">Login</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showLogin" class="hero min-h-screen" style="background-image: url('https://wallpaperaccess.com/full/9524787.jpg');">
+  <div class="flex justify-center align-middle">
+    <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-10 ">
+      <legend class="fieldset-legend pt-20 font-black text-center">Login</legend>
+
+      <label class="label">Email</label>
+      <input type="email" class="input" placeholder="Email" />
+
+      <label class="label">Password</label>
+      <input type="password" class="input" placeholder="Password" />
+
+      <button class="btn btn-neutral mt-4">Login</button>
+      <button class="btn btn-ghost mt-4" (click)="showLogin = false">Back</button>
+    </fieldset>
+  </div>
+</div>
