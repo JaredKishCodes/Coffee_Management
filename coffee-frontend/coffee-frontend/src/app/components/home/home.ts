@@ -10,5 +10,5 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 })
 export class Home {
 
-  showLogin: boolean = false;
+  
 }

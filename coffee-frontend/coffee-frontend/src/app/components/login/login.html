@@ -1,1 +1,53 @@
-<h1>hi</h1>
+<ng-container *ngIf="!showLogin; else content">
+  <div class="hero min-h-screen" style="background-image: url('https://wallpaperaccess.com/full/9524787.jpg');">
+    <div class="flex justify-center pt-1 pb-40 w-full">
+      <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-10">
+        <legend class="fieldset-legend font-black text-center text-2xl mb-4 pt-20">Login</legend>
+
+        <label class="label text-amber-800 ">Email</label>
+        <input type="email" class="input input-bordered" placeholder="Email" />
+
+        <label class="label text-amber-800">Password</label>
+        <input type="password" class="input input-bordered" placeholder="Password" />
+
+        <button class="btn btn-neutral mt-4 w-full">Login</button>
+
+        <p class="text-center mt-2 hover:text-amber-950 cursor-pointer active:text-amber-800" (click)="showLogin = true">
+          Don’t have an account?
+        </p>
+
+        <button class="btn btn-ghost mt-4 w-full" >Back</button>
+      </fieldset>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #content>
+  <div class="hero min-h-screen" style="background-image: url('https://wallpaperaccess.com/full/9524787.jpg');">
+    <div class="flex justify-center pt-1 pb-30 w-full">
+      <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-10">
+        <legend class="fieldset-legend font-black text-center text-2xl mb-4 pt-20">Register</legend>
+
+        <label class="label text-amber-800 ">FullName</label>
+        <input type="email" class="input input-bordered" placeholder="FullName" />
+
+        <label class="label text-amber-800 ">Email</label>
+        <input type="email" class="input input-bordered" placeholder="Email" />
+
+        <label class="label text-amber-800">Password</label>
+        <input type="password" class="input input-bordered" placeholder="Password" />
+
+        <label class="label text-amber-800">Confirm Password</label>
+        <input type="password" class="input input-bordered" placeholder="Confirm Password" />
+
+        <button class="btn btn-neutral mt-4 w-full">Register</button>
+
+        <p class="text-center mt-2 hover:text-amber-950 cursor-pointer active:text-amber-800" (click)="showLogin = false">
+          Already have an account?
+        </p>
+
+        <button class="btn btn-ghost mt-4 w-full" >Back</button>
+      </fieldset>
+    </div>
+  </div>
+</ng-template>
