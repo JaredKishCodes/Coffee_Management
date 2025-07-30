@@ -1,6 +1,14 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Ensure no scrollbars ever appear */
+  height: 100%;
+}
+
+
 @plugin "daisyui/theme" {
   name: "retro";
   default: false;

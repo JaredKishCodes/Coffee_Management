@@ -4,7 +4,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterOutlet, RouterModule,CommonModule],
+  imports: [ RouterModule,CommonModule],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
