@@ -37,8 +37,7 @@ export class Login {
         console.log('Login successful', response);
         this.showLoginSuccess = true;
         localStorage.setItem('token', response.token);
-        
-        
+        this.router.navigateByUrl('/menu');          
         setTimeout(() => {
           this.showLoginSuccess = false;
         }, 3000);
