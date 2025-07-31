@@ -1,3 +1,41 @@
+  <div class="navbar bg-base-100 container mx-auto max-w-7xl ">
+  <!-- Start: Logo and Dropdown -->
+  <div class="navbar-start">
+    <!-- Hamburger for mobile -->
+
+
+    <div class="dropdown">
+      <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+             viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </div>
+      <!-- Dropdown content -->
+      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+        <li><a routerLink="/home">Welcome</a></li>
+        <li><a routerLink="/menu">Menu</a></li>
+        <li><a routerLink="/orders">Orders</a></li>
+        <li><a routerLink="/inventory">Inventory</a></li>
+      </ul>
+    </div>
+    <!-- Logo -->
+    <a class="btn btn-ghost text-xl">Coffee Management System</a>
+  </div>
+
+  <!-- Center: Menu for large screens -->
+  <div class="navbar-center hidden md:flex">
+    <ul class="menu menu-horizontal px-1 space-x-2">
+      <li><a routerLink="/home">Welcome</a></li>
+      <li><a routerLink="/coffees">About us</a></li>
+      <li><a routerLink="/menu">Menu</a></li>
+      <li><a routerLink="/categories">Categories</a></li>
+      <li><a routerLink="/orders">Orders</a></li>
+      <li><a routerLink="/inventory">Inventory</a></li>
+    </ul>
+  </div>
+</div>
 
 
 <router-outlet></router-outlet>

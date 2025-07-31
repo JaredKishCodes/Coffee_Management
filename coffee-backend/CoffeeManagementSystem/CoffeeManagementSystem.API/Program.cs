@@ -13,6 +13,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors("AllowAll");
 }
 
 using (var scope = app.Services.CreateScope())
@@ -20,6 +21,8 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     await SeedData.SeedRolesAndAdminAsync(services, builder.Configuration);
 }
+
+
 
 app.UseHttpsRedirection();
 

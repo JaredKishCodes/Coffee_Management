@@ -18,12 +18,19 @@ namespace CoffeeManagementSystem.Application.Services
             var coffeeCategory = new CoffeeCategory
             {
                 Name = coffeeCategoryReq.Name,
-                Description = coffeeCategoryReq.Description
+                Description = coffeeCategoryReq.Description,
+                ImageUrl = coffeeCategoryReq.ImageUrl
             };
 
             await _coffeeCategoryRepo.AddCoffeeCategoryAsync(coffeeCategory);
 
-            return  new AllCategoriesDto {Id = coffeeCategory.Id, Name = coffeeCategoryReq.Name,Description = coffeeCategoryReq.Description };
+            return  new AllCategoriesDto 
+            {  
+                Id = coffeeCategory.Id,
+                Name = coffeeCategoryReq.Name,
+                Description = coffeeCategoryReq.Description,
+                ImageUrl = coffeeCategory.ImageUrl
+            };
         }
 
         public async Task<bool> DeleteCoffeeCategoryAsync(int id)
@@ -46,7 +53,8 @@ namespace CoffeeManagementSystem.Application.Services
             {
                 Id = c.Id,
                 Name = c.Name,
-                Description = c.Description
+                Description = c.Description,
+                ImageUrl = c.ImageUrl
             });
         }
 
@@ -65,7 +73,8 @@ namespace CoffeeManagementSystem.Application.Services
             {
                 Id = coffeeCategory.Id,
                 Name = coffeeCategory.Name,
-                Description = coffeeCategory.Description
+                Description = coffeeCategory.Description,
+                ImageUrl = coffeeCategory.ImageUrl
             };
 
         }
@@ -84,6 +93,7 @@ namespace CoffeeManagementSystem.Application.Services
 
             existingCoffeeCategory.Name = coffeeCategoryReq.Name;
             existingCoffeeCategory.Description = coffeeCategoryReq.Description;
+            existingCoffeeCategory.ImageUrl = coffeeCategoryReq.ImageUrl;
 
             await _coffeeCategoryRepo.UpdateCoffeeCategoryAsync(existingCoffeeCategory);
 
@@ -91,7 +101,8 @@ namespace CoffeeManagementSystem.Application.Services
             {
                 Id = existingCoffeeCategory.Id,
                 Name = existingCoffeeCategory.Name,
-                Description = existingCoffeeCategory.Description
+                Description = existingCoffeeCategory.Description,
+                ImageUrl = existingCoffeeCategory.ImageUrl
             };
         }
     }

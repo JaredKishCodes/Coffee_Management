@@ -20,6 +20,7 @@ namespace CoffeeManagementSystem.Infrastructure.Data.Configs
 
             builder.Property(x => x.Name).HasMaxLength(30).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(250).IsRequired();
+            builder.Property(x => x.ImageUrl).HasMaxLength(800);
 
             builder.HasMany(c => c.CoffeeItems)
                   .WithOne(i => i.Category)

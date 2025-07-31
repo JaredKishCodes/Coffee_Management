@@ -1,19 +1,24 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { CoffeeCategoryApiResponse } from '../../models/coffee.model';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class CoffeeCategory {
+export class CoffeeCategoryService {
 
   apiUrl = 'https://localhost:7168/api/CoffeeCategory'
-  constructor() {
-    // Initialization logic can go here
+
+  constructor(private http: HttpClient) {
+      
+
   }
 
-  // Example method to fetch coffee categories
-  getCategories() {
-    // This would typically make an HTTP request to fetch categories
-    return ['Espresso', 'Latte', 'Cappuccino', 'Americano'];
+  
+  getCoffeeCategories() :Observable<CoffeeCategoryApiResponse> {
+    return this.http.get<CoffeeCategoryApiResponse>(`${this.apiUrl}/GetAllCoffeeCategories`);
   }
   
 }

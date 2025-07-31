@@ -11,5 +11,9 @@ namespace CoffeeManagementSystem.Application.DTOs.CoffeeCategory
 
         [Required(ErrorMessage = "Description is required.")]
         public string Description { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "ImageURl is required.")]
+        public string ImageUrl { get; set; } = string.Empty;
+
     }
 }
