@@ -5,7 +5,7 @@ import { Home } from './components/home/home';
 import { Menu } from './components/menu/menu';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: Home },
   { path: 'login', component: Login } ,
   {path:'menu',component:Menu},

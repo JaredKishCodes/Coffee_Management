@@ -1,3 +1,25 @@
+<ng-container *ngIf="showSuccess" [ngTemplateOutlet]="registerSuccess"></ng-container>
+
+<ng-template #registerSuccess>
+  <div class="toast toast-top toast-center">
+    <div class="alert alert-success">
+      <span>Registered successfully!</span>
+    </div>
+  </div>
+</ng-template>
+
+<ng-container *ngIf="showLoginSuccess" [ngTemplateOutlet]="loginSuccess"></ng-container>
+<ng-template #loginSuccess>
+  <div role="alert" class="alert alert-success">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+  <span>Your purchase has been confirmed!</span>
+</div>
+</ng-template>
+
+
+
 <ng-container *ngIf="!showLogin; else content">
   <div class="hero min-h-screen" style="background-image: url('https://wallpaperaccess.com/full/9524787.jpg');">
     <div class="flex justify-center pt-1 pb-40 w-full">
@@ -5,10 +27,12 @@
         <legend class="fieldset-legend font-black text-center text-2xl mb-4 pt-20">Login</legend>
 
         <label class="label text-amber-800 ">Email</label>
-        <input type="email" class="input input-bordered" placeholder="Email" />
+        <input type="email" class="input input-bordered" placeholder="Email" 
+        name="email" [(ngModel)]="loginObj.email"/>
 
         <label class="label text-amber-800">Password</label>
-        <input type="password" class="input input-bordered" placeholder="Password" />
+        <input type="password" class="input input-bordered" placeholder="Password"
+         name="password" [(ngModel)]="loginObj.password" />
 
         <button class="btn btn-neutral mt-4 w-full">Login</button>
 
@@ -29,16 +53,20 @@
         <legend class="fieldset-legend font-black text-center text-2xl mb-4 pt-20">Register</legend>
 
         <label class="label text-amber-800 ">FullName</label>
-        <input type="email" class="input input-bordered" placeholder="FullName" />
+        <input type="email" class="input input-bordered" placeholder="FullName" 
+        name="fullName" [(ngModel)]="registerObj.fullName"/>
 
         <label class="label text-amber-800 ">Email</label>
-        <input type="email" class="input input-bordered" placeholder="Email" />
+        <input type="email" class="input input-bordered" placeholder="Email" 
+        name="email" [(ngModel)]="registerObj.email" />
 
         <label class="label text-amber-800">Password</label>
-        <input type="password" class="input input-bordered" placeholder="Password" />
+        <input type="password" class="input input-bordered" placeholder="Password" 
+        name="password" [(ngModel)]="registerObj.password" />
 
         <label class="label text-amber-800">Confirm Password</label>
-        <input type="password" class="input input-bordered" placeholder="Confirm Password" />
+        <input type="password" class="input input-bordered" placeholder="Confirm Password"  
+        name="confirmPassword" [(ngModel)]="registerObj.confirmPassword"/>
 
         <button class="btn btn-neutral mt-4 w-full">Register</button>
 

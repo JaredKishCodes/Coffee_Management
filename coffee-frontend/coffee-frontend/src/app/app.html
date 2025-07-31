@@ -1,4 +1,4 @@
-  <div class="navbar bg-base-100 container mx-auto max-w-7xl border-b border-b-black">
+  <div class="navbar bg-base-100 container mx-auto max-w-7xl ">
   <!-- Start: Logo and Dropdown -->
   <div class="navbar-start">
     <!-- Hamburger for mobile -->
@@ -14,6 +14,7 @@
       </div>
       <!-- Dropdown content -->
       <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+        <li><a routerLink="/coffees">Welcome</a></li>
         <li><a routerLink="/coffees">Menu</a></li>
         <li><a routerLink="/orders">Orders</a></li>
         <li><a routerLink="/inventory">Inventory</a></li>
@@ -26,7 +27,9 @@
   <!-- Center: Menu for large screens -->
   <div class="navbar-center hidden md:flex">
     <ul class="menu menu-horizontal px-1 space-x-2">
-      <li><a routerLink="/coffees">Coffees</a></li>
+      <li><a routerLink="/coffees">Welcome</a></li>
+      <li><a routerLink="/coffees">About us</a></li>
+      <li><a routerLink="/coffees">Menu</a></li>
       <li><a routerLink="/categories">Categories</a></li>
       <li><a routerLink="/orders">Orders</a></li>
       <li><a routerLink="/inventory">Inventory</a></li>

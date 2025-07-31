@@ -6,6 +6,7 @@ using CoffeeManagementSystem.Application.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace CoffeeManagementSystem.API.Controllers
 {
@@ -15,14 +16,18 @@ namespace CoffeeManagementSystem.API.Controllers
     {
         private readonly ICoffeeCategoryService _coffeeCategoryService;
 
-        public CoffeeCategoryController(ICoffeeCategoryService coffeeCategoryService)
+        public ILogger<CoffeeCategoryController> _logger { get; }
+
+        public CoffeeCategoryController(ICoffeeCategoryService coffeeCategoryService,ILogger<CoffeeCategoryController> logger)
         {
             _coffeeCategoryService = coffeeCategoryService;
+            _logger = logger;
         }
-        [Authorize(Roles = "Admin,Customer,Staff")]
+
         [HttpGet("GetAllCoffeeCategories")]
         public async Task<ActionResult<ApiResponse<IEnumerable<AllCategoriesDto>>>> GetAllCoffeeCategoriesAsync()
         {
+            _logger.LogInformation("Fetching all coffee categories.");
             var categories = await _coffeeCategoryService.GetAllCoffeeCategoriesAsync();
             if (categories == null || !categories.Any())
             {

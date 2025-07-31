@@ -63,12 +63,7 @@ namespace CoffeeManagementSystem.Infrastructure.Auth.Service
                 throw new ApplicationException($"User creation failed: {errors}");
             }
 
-            // Validate and assign role
-            var validRoles = new[] { "Admin", "Customer", "Staff" };
-            if (!validRoles.Contains(registerDto.Role))
-                throw new ApplicationException("Invalid role specified.");
-
-             await _userManager.AddToRoleAsync(newUser, registerDto.Role);
+    
 
             var roles = await _userManager.GetRolesAsync(newUser);
             // Generate JWT
