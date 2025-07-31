@@ -1,42 +1,81 @@
-☕ Coffee Management System
-A modern full-stack Coffee Shop Management System built with ASP.NET Core, Angular, and Clean Architecture principles. This system streamlines coffee shop operations—ranging from authentication to managing coffee items, categories, inventory, and orders—with a strong focus on scalability, maintainability, and security.
+# ☕ Coffee Management System
 
-🚀 Key Features
-🔐 User Authentication & Role-Based Access
-Supports Admin, Staff, and Customer roles with secure login via JWT & ASP.NET Identity.
+A full-stack **Coffee Shop Management System** built with **ASP.NET Core**, **Clean Architecture**, and **Angular**.  
+It handles everything from user authentication to managing coffee items, categories, inventory, and orders.  
+Designed for scalability, modularity, and clean separation of concerns.
 
-🗂️ Complete CRUD Operations
+---
 
-Coffee Items
+## 📚 Table of Contents
 
-Coffee Categories
+- [✨ Key Features](#-key-features)
+- [🛠️ Tech Stack](#️-tech-stack)
+- [⚙️ Getting Started](#-getting-started)
+- [📁 Project Structure](#-project-structure)
+- [📸 Screenshots](#-screenshots)
+- [📄 License](#-license)
 
-Inventory Management
+---
 
-Order Processing
+## ✨ Key Features
 
-🧼 Clean Architecture
-Layered design: Application, Domain, Infrastructure, and API for clear separation of concerns.
+✅ **User Authentication & Role-based Authorization**  
+→ Roles: Admin, Staff, Customer
 
-🌐 Modern Frontend
+✅ **CRUD Operations**  
+→ Coffee Items, Categories, Inventory, Orders
 
-Angular 19 for robust SPA experience
+✅ **Secure Login with JWT + ASP.NET Identity**  
+✅ **Clean Architecture** (Application, Domain, Infrastructure, API)  
+✅ **RESTful API + DTO-based data transfer**  
+✅ **Swagger UI** for easy API testing  
+✅ **Angular Frontend with Tailwind CSS + DaisyUI**  
+✅ **Route Protection using Auth Guards**  
 
-Styled using TailwindCSS and DaisyUI
+---
 
-📦 Swagger-Enabled API Testing
-Built-in Swagger UI for seamless API exploration and testing.
+## 🛠️ Tech Stack
 
-🛡️ Secure Routing
-Auth Guards protect restricted routes on the frontend.
+| Layer       | Tech                            |
+|-------------|----------------------------------|
+| Backend     | ASP.NET Core 8, EF Core, C#     |
+| Frontend    | Angular 19, Tailwind CSS, DaisyUI |
+| Database    | SQL Server                      |
+| Security    | JWT, ASP.NET Identity Roles     |
+| API Testing | Swagger                         |
 
-🔄 DTO-Based Data Flow
-Clean API contracts using Data Transfer Objects.
+---
 
-🛠️ Tech Stack
-Layer	Technology
-Backend	ASP.NET Core 8, Entity Framework Core
-Frontend	Angular 19, Tailwind CSS, DaisyUI
-Database	SQL Server
-API Docs	Swagger
-Security	JWT Tokens, ASP.NET Identity, Role Management
+## ⚙️ Getting Started
+
+### 🧩 Backend Setup
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/your-username/coffee-management-system.git
+
+# 2. Navigate to backend project
+cd coffee-management-system/CoffeeManagementSystem.API
+
+# 3. Add your SQL Server connection string in appsettings.json
+
+### 🖼️ Frontend Setup
+bash
+Copy
+Edit
+# 1. Navigate to the Angular frontend
+cd coffee-management-system/coffee-frontend
+
+# 2. Install dependencies
+npm install
+
+# 3. Run the development server
+ng serve
+
+# App runs at: http://localhost:4200
+
+# 4. Apply DB migrations
+dotnet ef database update
+
+# 5. Run the API
+dotnet run
