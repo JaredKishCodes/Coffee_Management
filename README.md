@@ -11,9 +11,6 @@ Designed for scalability, modularity, and clean separation of concerns.
 - [✨ Key Features](#-key-features)
 - [🛠️ Tech Stack](#️-tech-stack)
 - [⚙️ Getting Started](#-getting-started)
-- [📁 Project Structure](#-project-structure)
-- [📸 Screenshots](#-screenshots)
-- [📄 License](#-license)
 
 ---
 
