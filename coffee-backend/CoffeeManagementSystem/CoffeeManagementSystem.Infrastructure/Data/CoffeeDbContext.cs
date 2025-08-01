@@ -18,6 +18,8 @@ namespace CoffeeManagementSystem.Infrastructure.Data
         public DbSet<CoffeeItem> CoffeeItems { get; set; } 
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Cart> Carts { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
