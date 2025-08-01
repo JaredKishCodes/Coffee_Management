@@ -2,34 +2,60 @@
 using CoffeeManagementSystem.Domain.Entities;
 using CoffeeManagementSystem.Domain.Interfaces;
 using CoffeeManagementSystem.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeManagementSystem.Infrastructure.Repositories
 {
     public class CartItemRepo(CoffeeDbContext _context) : ICartItemRepo
     {
-        public Task<CartItem?> AddCartItemAsync(CartItem cartItem)
+        public async Task<CartItem?> AddCartItemAsync(CartItem cartItem)
         {
-            throw new NotImplementedException();
+          await  _context.CartItems.AddAsync(cartItem);
+          await _context.SaveChangesAsync();
+
+            return cartItem;
         }
 
-        public Task<bool> DeleteCartItemAsync(int cartItemId)
+        public async Task<bool> DeleteCartItemAsync(int cartItemId)
         {
-            throw new NotImplementedException();
+            var cart =await _context.CartItems.FirstOrDefaultAsync(x => x.Id == cartItemId);
+            if (cart != null)
+            { 
+                _context.CartItems.Remove(cart);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
         }
 
-        public Task<CartItem?> GetCartItemByIdAsync(int id)
+        public async Task<CartItem?> GetCartItemByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var cart = await _context.CartItems.Include(x => x.CoffeeItem).FirstOrDefaultAsync(x => x.Id == id);
+            return cart;
         }
 
-        public Task<IEnumerable<CartItem>> GetCartItemsAsync()
+        public async Task<IEnumerable<CartItem>> GetCartItemsAsync()
         {
-            throw new NotImplementedException();
+            return await _context.CartItems.Include(x => x.CoffeeItem).ToListAsync();
         }
 
-        public Task<CartItem?> UpdateCartItemAsync(int cartItemId, int quantity)
+        public async Task<CartItem?> UpdateCartItemAsync(int cartItemId, int quantity)
         {
-            throw new NotImplementedException();
+            var cartItem = await _context.CartItems
+                .Include(x => x.CoffeeItem)
+                .FirstOrDefaultAsync(x => x.Id == cartItemId);
+
+            if (cartItem == null)
+                return null;
+
+            cartItem.Quantity = quantity;
+            cartItem.Total = cartItem.CoffeeItem.Price * quantity;
+
+            _context.CartItems.Update(cartItem);
+            await _context.SaveChangesAsync();
+
+            return cartItem;
         }
+
     }
 }
