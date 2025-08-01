@@ -12,5 +12,5 @@ export const routes: Routes = [
   { path: 'home', component: Home },
   { path: 'login', component: Login },
   { path: 'menu', component: Menu },
-  { path: 'coffees/:id', component:CoffeeItems , canActivate:[authGuard]}
+  { path: 'coffees/:categoryId', component:CoffeeItems , canActivate:[authGuard]}
 ]

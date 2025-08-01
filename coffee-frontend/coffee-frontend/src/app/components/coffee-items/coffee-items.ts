@@ -1,19 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CoffeeCategoryService } from '../../services/coffee-category/coffee-category';
+import { Coffee, CoffeeCategoryApiResponse, CoffeesApiResponse } from '../../models/coffee.model';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-coffee-items',
-  imports: [],
+  imports: [CommonModule, FormsModule],
+  standalone: true, // optional if using standalone components
   templateUrl: './coffee-items.html',
-  styleUrl: './coffee-items.css'
+  styleUrls: ['./coffee-items.css']
 })
 export class CoffeeItems implements OnInit {
-  // This component is currently empty, but you can add logic here later.
-  
+  private route = inject(ActivatedRoute);
+  private coffeeService = inject(CoffeeCategoryService);
+
+  coffeeItems: Coffee[] = [];
+  categoryId!: number;
+
   ngOnInit(): void {
-  
+    const idFromRoute = this.route.snapshot.paramMap.get('categoryId');
+    console.log('Category ID from URL:', idFromRoute);
+
+    if (idFromRoute) {
+      this.categoryId = +idFromRoute; // Convert to number
+      this.getCoffeesByCategory();    // ✅ Call the method here
+    }
   }
-  
-  // You can add methods to handle coffee item interactions.
+
+  getCoffeesByCategory(): void {
+  this.coffeeService.getCoffeesByCategory(this.categoryId).subscribe({
+    next: (res: CoffeesApiResponse) => {
+      this.coffeeItems = res.data; // or whatever the actual property name is
+    },
+    error: (err) => {
+      console.error('Error fetching coffees:', err);
+    }
+  });
+}
 
 }

@@ -15,6 +15,7 @@ export class Login {
   showLogin: boolean = false;
   showSuccess: boolean = false;
   showLoginSuccess: boolean = false;
+  showLoginError: boolean = false
 
   authService = inject(Auth)
   router = inject(Router);
@@ -37,12 +38,18 @@ export class Login {
         console.log('Login successful', response);
         this.showLoginSuccess = true;
         localStorage.setItem('token', response.token);
-        this.router.navigateByUrl('/menu');          
+
         setTimeout(() => {
           this.showLoginSuccess = false;
-        }, 3000);
+          this.router.navigateByUrl('/menu');
+        }, 2000);
       },
       error: (error) => {
+        this.showLoginError = true
+
+        setTimeout(() => {
+          this.showLoginError = false;
+        }, 2000);
         console.error('Login failed', error);
       }
     });
@@ -67,6 +74,7 @@ export class Login {
         };
       },
       error: (error) => {
+
         console.error('Registration failed', error);
       }
     });

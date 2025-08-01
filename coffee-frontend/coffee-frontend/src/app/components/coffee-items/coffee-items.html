@@ -1,1 +1,24 @@
-<p>coffee-items works!</p>
+<div class="container mx-auto">
+  
+</div>
+
+<div class=" bg-amber-900 w-screen h-screen flex items-start justify-start p-20 ">
+
+  
+
+  <div class="flex flex-row gap-8 pt-10">
+    <!-- Card 1 -->
+    <div *ngFor="let coffee of coffeeItems" class="card bg-base-100 w-64 h-80 shadow-sm">
+      <figure class="w-full h-48 overflow-hidden">
+        <img class=" w-full h-full object-cover" [src]="coffee.imageUrl" alt="{{ coffee.name }}" />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">{{ coffee.name }}</h2>
+        <small>{{ coffee.description }}</small>
+        <div class="card-actions justify-end">
+
+        </div>
+      </div>
+    </div>
+
+   

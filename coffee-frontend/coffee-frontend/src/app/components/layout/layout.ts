@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
@@ -9,4 +9,10 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 })
 export class Layout {
 
+  router = inject(Router)
+  onLogout(){
+    localStorage.clear(); // clears all localStorage data
+  this.router.navigate(['/login']);
+  
+  }
 }
