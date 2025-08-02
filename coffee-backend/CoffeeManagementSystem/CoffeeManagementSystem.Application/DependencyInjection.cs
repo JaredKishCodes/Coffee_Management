@@ -18,6 +18,8 @@ namespace CoffeeManagementSystem.Application
              services.AddScoped<ICoffeeCategoryService, CoffeeCategoryService>();
              services.AddScoped<ICoffeeInventoryService, CoffeeInventoryService>();
              services.AddScoped<IOrderService, OrderService>();
+             services.AddScoped<ICartItemService, CartItemService>();
+             services.AddScoped<ICartService, CartService>();
 
             return services;
         }

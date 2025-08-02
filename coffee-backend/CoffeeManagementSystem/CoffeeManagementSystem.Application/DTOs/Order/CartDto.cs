@@ -1,9 +1,9 @@
 ﻿
 
-using CoffeeManagementSystem.Application.DTOs.Order;
+using CoffeeManagementSystem.Application.DTOs.Cart;
 using CoffeeManagementSystem.Domain.Enums;
 
-namespace CoffeeManagementSystem.Application.DTOs.Cart
+namespace CoffeeManagementSystem.Application.DTOs.Order
 {
     public class CartDto
     {

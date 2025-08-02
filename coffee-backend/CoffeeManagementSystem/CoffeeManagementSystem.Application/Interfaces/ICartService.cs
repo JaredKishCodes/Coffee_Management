@@ -1,16 +1,17 @@
 ﻿
 
 using CoffeeManagementSystem.Application.DTOs.Cart;
+using CoffeeManagementSystem.Application.DTOs.Order;
 using CoffeeManagementSystem.Domain.Entities;
 
 namespace CoffeeManagementSystem.Application.Interfaces
 {
-    public interface ICartItemService
+    public interface ICartService
     {
-        Task<IEnumerable<CartItemDto>> GetCartItemsAsync();
-        Task<CartItemDto?> GetCartItemByIdAsync(int cartItemId);
-        Task<CartItemDto?> AddCartItemAsync(AddCartItemDto cartItem);
-        Task<CartItemDto?> UpdateCartItemAsync(int cartItemId, int quantity);
-        Task<bool> DeleteCartItemAsync(int cartItemId);
+        Task<IEnumerable<CartDto>> GetCartsAsync();
+        Task<CartDto?> GetCartByIdAsync(int cartId);
+        Task<CartDto?> AddCartAsync(AddCartDto addCartDto);
+        Task<CartDto?> UpdateCartAsync( int id ,AddCartDto addCartDto);
+        Task<bool> DeleteCartAsync(int id);
     }
 }
