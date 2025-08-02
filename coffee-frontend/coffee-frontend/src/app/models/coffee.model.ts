@@ -5,6 +5,11 @@ export interface CoffeeCategory {
   imageUrl: string;
 }
 
+export interface Category {
+  id: number;
+  name: string;
+}
+
 export interface Coffee {
   id: number;
   name: string;
@@ -14,7 +19,10 @@ export interface Coffee {
   stock: number;
   isAvailable: boolean;
   imageUrl: string;
+  categoryId: number;
+  category: Category;
 }
+
 
 export interface CoffeeCategoryApiResponse {
       success: boolean;
