@@ -10,7 +10,7 @@ namespace CoffeeManagementSystem.Application.Services
     public class CartItemService(ICartItemRepo _cartItemRepo,ICoffeeItemRepo _coffeeItemRepo) : ICartItemService
     {
         public async Task<CartItemDto?> AddCartItemAsync(AddCartItemDto cartItem)
-        {
+            {
            var  coffee = await _coffeeItemRepo.GetCoffeeItemByIdAsync(cartItem.CoffeeItemId);
             if (coffee == null)
                 throw new Exception("Coffee not found");

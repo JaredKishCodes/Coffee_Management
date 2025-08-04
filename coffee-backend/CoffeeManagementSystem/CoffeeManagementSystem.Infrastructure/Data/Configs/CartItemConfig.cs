@@ -27,7 +27,7 @@ namespace CoffeeManagementSystem.Infrastructure.Data.Configs
             builder.HasOne(x => x.CoffeeItem)
                 .WithMany()
                 .HasForeignKey(x => x.CoffeeItemId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade);  
         }
     }
 }

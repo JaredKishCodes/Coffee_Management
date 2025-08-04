@@ -13,29 +13,37 @@ namespace CoffeeManagementSystem.Application.Services
     {
         public async Task<CartDto?> AddCartAsync(AddCartDto addCartDto)
         {
-            var cartDto = new Cart
+            var cart = new Cart
             {
                 CustomerName = addCartDto.CustomerName,
-                CartItems = addCartDto.CartItems.Select(item => new CartItem
-                {
-                    CoffeeItemId = item.CoffeeItemId,
-                    Quantity = item.Quantity,
-                }).ToList()
-
+                CartItems = new List<CartItem>()
             };
-            if (cartDto.CartItems.Any(i => i.CoffeeItem == null))
+
+            foreach (var itemDto in addCartDto.CartItems)
             {
-                throw new Exception("One or more CartItems do not have CoffeeItem data loaded.");
+                var coffeeItem = await _coffeeItemRepo.GetCoffeeItemByIdAsync(itemDto.CoffeeItemId);
+                if (coffeeItem == null)
+                {
+                    throw new Exception($"CoffeeItem with ID {itemDto.CoffeeItemId} not found.");
+                }
+
+                cart.CartItems.Add(new CartItem
+                {
+                    CoffeeItemId = itemDto.CoffeeItemId,
+                    Quantity = itemDto.Quantity,
+                    CoffeeItem = coffeeItem,
+                    Total = itemDto.Quantity * coffeeItem.Price
+                });
             }
 
+            cart.TotalPrice = cart.CartItems.Sum(i => i.Total);
 
-            cartDto.TotalPrice = cartDto.CartItems.Sum(i => i.Quantity * i.CoffeeItem.Price);
-
-            var result = await _cartRepo.AddCartAsync(cartDto);
+            var result = await _cartRepo.AddCartAsync(cart);
             if (result == null)
             {
                 return null;
             }
+
             return new CartDto
             {
                 Id = result.Id,
@@ -51,6 +59,7 @@ namespace CoffeeManagementSystem.Application.Services
                 }).ToList()
             };
         }
+
 
         public async Task<bool> DeleteCartAsync(int id)
         {
