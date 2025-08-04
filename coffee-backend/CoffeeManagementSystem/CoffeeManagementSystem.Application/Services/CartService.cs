@@ -55,7 +55,7 @@ namespace CoffeeManagementSystem.Application.Services
                     CoffeeItemId = item.CoffeeItemId,
                     Quantity = item.Quantity,
                     Total = item.Total,
-                    CoffeeName = item.CoffeeItem?.Name ?? "Unknown"
+                    CoffeeItem = item.CoffeeItem?.Name ?? "Unknown"
                 }).ToList()
             };
         }
@@ -89,7 +89,7 @@ namespace CoffeeManagementSystem.Application.Services
                     CoffeeItemId = item.CoffeeItemId,
                     Quantity = item.Quantity,
                     Total = item.Total,
-                    CoffeeName = item.CoffeeItem?.Name ?? "Unknown"
+                    CoffeeItem = item.CoffeeItem?.Name ?? "Unknown"
                 }).ToList()
             };
         }
@@ -109,7 +109,7 @@ namespace CoffeeManagementSystem.Application.Services
                     CoffeeItemId = item.CoffeeItemId,
                     Quantity = item.Quantity,
                     Total = item.Total,
-                    CoffeeName = item.CoffeeItem?.Name ?? "Unknown"
+                    CoffeeItem = item.CoffeeItem?.Name ?? "Unknown"
                 }).ToList()
             });
         }
@@ -156,7 +156,7 @@ namespace CoffeeManagementSystem.Application.Services
                     Quantity = item.Quantity,
                     UnitPrice = item.UnitPrice,
                     Total = item.Total,
-                    CoffeeName = item.CoffeeItem.Name
+                    CoffeeItem = item.CoffeeItem.Name
                 }).ToList()
             };
         }

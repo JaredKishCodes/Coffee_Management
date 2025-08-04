@@ -4,31 +4,48 @@ using CoffeeManagementSystem.Application.DTOs.Cart;
 using CoffeeManagementSystem.Application.Interfaces;
 using CoffeeManagementSystem.Domain.Entities;
 using CoffeeManagementSystem.Domain.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace CoffeeManagementSystem.Application.Services
 {
-    public class CartItemService(ICartItemRepo _cartItemRepo,ICoffeeItemRepo _coffeeItemRepo) : ICartItemService
+    public class CartItemService(ICartItemRepo _cartItemRepo,ICoffeeItemRepo _coffeeItemRepo
+                                ,ICartRepo _cartRepo, ILogger<CartItemService> logger) : ICartItemService
     {
-        public async Task<CartItemDto?> AddCartItemAsync(AddCartItemDto cartItem)
+        public async Task<CartItemDto?> AddCartItemAsync(AddCartItemDto cartItemDto)
             {
-           var  coffee = await _coffeeItemRepo.GetCoffeeItemByIdAsync(cartItem.CoffeeItemId);
+
+            var cart = await _cartRepo.GetCartByIdAsync(cartItemDto.CartId);
+            if (cart == null)
+                throw new Exception("Cart not found");
+
+            var  coffee = await _coffeeItemRepo.GetCoffeeItemByIdAsync(cartItemDto.CoffeeItemId);
             if (coffee == null)
                 throw new Exception("Coffee not found");
 
-            if (coffee.Stock < cartItem.Quantity)
+            if (coffee.Stock < cartItemDto.Quantity)
                 throw new Exception("Insufficient stock");
 
-            var cart = await _cartItemRepo.GetCartItemByIdAsync(cartItem.CartId);
+            var cartItem = await _cartItemRepo.GetCartItemByIdAsync(cartItemDto.CartId);
             if (cart == null)
-                throw new Exception("Cart not found");
+                throw new Exception("CartItem not found");
+
+            logger.LogInformation($"Getting cart item{cartItemDto.CartId}");
+            Console.WriteLine($"CoffeeItemId: {cartItemDto.CoffeeItemId}, Quantity: {cartItemDto.Quantity}, CartId: {cartItemDto.CartId}");
+            Console.WriteLine($"Coffee found: {coffee?.Name ?? "NULL"}");
+
+
 
 
             var cartItemEntity = new CartItem
             {
-                CoffeeItemId = cartItem.CoffeeItemId,
+                CoffeeItemId = cartItemDto.CoffeeItemId,
                 Quantity = cartItem.Quantity,
                 CartId = cartItem.CartId,
+                UnitPrice = coffee.Price,
+                Total = coffee.Price * cartItem.Quantity
+
             };
+
 
             coffee.Stock -= cartItem.Quantity;
             await _coffeeItemRepo.UpdateCoffeeItemAsync(coffee);

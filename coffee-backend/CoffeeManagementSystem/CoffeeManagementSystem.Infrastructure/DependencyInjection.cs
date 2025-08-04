@@ -16,7 +16,7 @@ namespace CoffeeManagementSystem.Infrastructure
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services,IConfiguration config)
         {
             services.AddDbContext<CoffeeDbContext>(options =>
-            {
+                {
                 options.UseSqlServer(config.GetConnectionString("CoffeeDbConnection"));
             });
 
