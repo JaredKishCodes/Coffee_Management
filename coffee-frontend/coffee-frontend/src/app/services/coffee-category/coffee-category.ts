@@ -22,7 +22,7 @@ export class CoffeeCategoryService {
    getCoffeesByCategory(categoryId: number): Observable<CoffeesApiResponse> {
     return this.http.get<CoffeesApiResponse>(`https://localhost:7168/api/Coffee/GetCoffeesByCategory?categoryId=${categoryId}`);
   }
-
+  
   
   
 }

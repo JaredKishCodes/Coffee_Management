@@ -5,6 +5,8 @@ import { CoffeeCategoryService } from '../../services/coffee-category/coffee-cat
 import { Coffee, CoffeeCategoryApiResponse, CoffeesApiResponse } from '../../models/coffee.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CartItem } from '../../models/carItem.model';
+import { CartItemService } from '../../services/cart-item/cart-item';
 
 @Component({
   selector: 'app-coffee-items',
@@ -16,8 +18,10 @@ import { CommonModule } from '@angular/common';
 export class CoffeeItems implements OnInit {
   private route = inject(ActivatedRoute);
   private coffeeService = inject(CoffeeCategoryService);
+  private cartItemService = inject(CartItemService);
 
   coffeeItems: Coffee[] = [];
+  cartItems: CartItem[] = [];
   categoryId!: number;
 
   ngOnInit(): void {
@@ -29,6 +33,8 @@ export class CoffeeItems implements OnInit {
       this.getCoffeesByCategory();    // ✅ Call the method here
     }
   }
+ 
+
 
   getCoffeesByCategory(): void {
   this.coffeeService.getCoffeesByCategory(this.categoryId).subscribe({
