@@ -32,6 +32,7 @@ namespace CoffeeManagementSystem.Application.Services
                     CoffeeItemId = itemDto.CoffeeItemId,
                     Quantity = itemDto.Quantity,
                     CoffeeItem = coffeeItem,
+                    UnitPrice = coffeeItem.Price,
                     Total = itemDto.Quantity * coffeeItem.Price
                 });
             }
@@ -48,7 +49,7 @@ namespace CoffeeManagementSystem.Application.Services
             {
                 Id = result.Id,
                 CustomerName = result.CustomerName,
-                TotalPrice = result.TotalPrice,
+                TotalPrice = result.CartItems.Sum(i => i.Total),
                 CartItems = result.CartItems.Select(item => new CartItemDto
                 {
                     Id = item.Id,
@@ -82,7 +83,7 @@ namespace CoffeeManagementSystem.Application.Services
             {
                 Id = cart.Id,
                 CustomerName = cart.CustomerName,
-                TotalPrice = cart.TotalPrice,
+                TotalPrice = cart.CartItems.Sum(i => i.Total),
                 CartItems = cart.CartItems.Select(item => new CartItemDto
                 {
                     Id = item.Id,
@@ -102,7 +103,7 @@ namespace CoffeeManagementSystem.Application.Services
             {
                 Id = cart.Id,
                 CustomerName = cart.CustomerName,
-                TotalPrice = cart.TotalPrice,
+                TotalPrice = cart.CartItems.Sum(i => i.Total),
                 CartItems = cart.CartItems.Select(item => new CartItemDto
                 {
                     Id = item.Id,
@@ -148,7 +149,7 @@ namespace CoffeeManagementSystem.Application.Services
             {
                 Id = result.Id,
                 CustomerName = result.CustomerName,
-                TotalPrice = result.TotalPrice,
+                TotalPrice = result.CartItems.Sum(i => i.Total),
                 CartItems = result.CartItems.Select(item => new CartItemDto
                 {
                     Id = item.Id,

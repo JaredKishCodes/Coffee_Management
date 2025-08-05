@@ -9,5 +9,36 @@
 </head>
 <body data-theme="retro">
   <app-root></app-root>
+
+  <script>
+  const modal = document.getElementById("my_modal_2");
+
+  function getScrollbarWidth() {
+    return window.innerWidth - document.documentElement.clientWidth;
+  }
+
+  // Show modal
+  function openModal() {
+    const scrollbarWidth = getScrollbarWidth();
+    document.body.style.paddingRight = scrollbarWidth + "px";
+    document.body.classList.add("overflow-hidden"); // optional: prevent scrolling
+    modal.showModal();
+  }
+
+  // Close modal when clicking the backdrop or using ESC
+  modal.addEventListener("close", () => {
+    document.body.style.paddingRight = "";
+    document.body.classList.remove("overflow-hidden");
+  });
+
+  // Optional: If you're closing modal manually using JS
+  function closeModal() {
+    modal.close();
+  }
+
+  // Replace the onclick on button with this if you want better control:
+  // document.querySelector("#openModalBtn").addEventListener("click", openModal);
+</script>
+
 </body>
 </html>

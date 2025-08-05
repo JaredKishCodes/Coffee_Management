@@ -2,6 +2,7 @@
 using CoffeeManagementSystem.Application.DTOs.Cart;
 using CoffeeManagementSystem.Application.DTOs.Order;
 using CoffeeManagementSystem.Application.Interfaces;
+using CoffeeManagementSystem.Application.Services;
 using CoffeeManagementSystem.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -125,6 +126,28 @@ namespace CoffeeManagementSystem.API.Controllers
                 Data = updatedCartItem
             });
 
+        }
+
+        [HttpDelete("DeleteCartItem/{id}")]
+        public async Task<ActionResult<ApiResponse<string>>> DeleteCartItemAsync(int id)
+        {
+            var result = await _cartItemService.DeleteCartItemAsync(id);
+            if (!result)
+            {
+                return NotFound(new ApiResponse<string>
+                {
+                    Success = false,
+                    Message = "Cart item not found or delete failed",
+                    Data = null
+                });
+            }
+
+            return Ok(new ApiResponse<string>
+            {
+                Success = true,
+                Message = "Cart item deleted successfully",
+                Data = null
+            });
         }
     }
 

@@ -13,7 +13,9 @@ namespace CoffeeManagementSystem.Infrastructure.Repositories
           await  _context.CartItems.AddAsync(cartItem);
           await _context.SaveChangesAsync();
 
-            return cartItem;
+            return await _context.CartItems
+        .Include(c => c.Cart)
+        .FirstOrDefaultAsync(c => c.Id == cartItem.Id);
         }
 
         public async Task<bool> DeleteCartItemAsync(int cartItemId)

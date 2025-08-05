@@ -39,16 +39,17 @@ namespace CoffeeManagementSystem.Application.Services
             var cartItemEntity = new CartItem
             {
                 CoffeeItemId = cartItemDto.CoffeeItemId,
-                Quantity = cartItem.Quantity,
-                CartId = cartItem.CartId,
+                Quantity = cartItemDto.Quantity,
+                CartId = cartItemDto.CartId,
                 UnitPrice = coffee.Price,
-                Total = coffee.Price * cartItem.Quantity
+                Total = coffee.Price * cartItemDto.Quantity
 
             };
 
 
-            coffee.Stock -= cartItem.Quantity;
+            coffee.Stock -= cartItemDto.Quantity;
             await _coffeeItemRepo.UpdateCoffeeItemAsync(coffee);
+    
 
             var addedItem = await _cartItemRepo.AddCartItemAsync(cartItemEntity);
             if (addedItem == null) return null;

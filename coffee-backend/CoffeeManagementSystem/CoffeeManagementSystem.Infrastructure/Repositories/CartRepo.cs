@@ -18,7 +18,12 @@ namespace CoffeeManagementSystem.Infrastructure.Repositories
         {
             await _context.Carts.AddAsync(cart);
             await _context.SaveChangesAsync();
-            return cart;
+
+            return await _context.Carts
+             .Include(c => c.CartItems)
+             .ThenInclude(ci => ci.CoffeeItem)
+             .FirstOrDefaultAsync(c => c.Id == cart.Id);
+
         }
 
         public async Task<bool> DeleteCartAsync(int id)
