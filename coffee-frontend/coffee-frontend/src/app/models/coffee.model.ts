@@ -15,7 +15,7 @@ export interface Coffee {
   name: string;
   description: string;
   price: number;
-  size: number;
+  size: 'Small' | 'Medium' | 'Large';
   stock: number;
   isAvailable: boolean;
   imageUrl: string;
@@ -23,15 +23,21 @@ export interface Coffee {
   category: Category;
 }
 
+export interface CoffeeResponse{
+  success: boolean;
+  message: string;
+  data: Coffee;
+}
+
 
 export interface CoffeeCategoryApiResponse {
       success: boolean;
       message: string;
-      data: CoffeeCategory[]; // 🔥 this is the array *ngFor needs
+      data: CoffeeCategory[]; 
 }
 
 export interface CoffeesApiResponse{
   success: boolean;
   message: string;
-  data: Coffee[]; // 🔥 this is the array *ngFor needs
+  data: Coffee[]; 
 }

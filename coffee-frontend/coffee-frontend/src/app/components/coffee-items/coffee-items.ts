@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CoffeeCategoryService } from '../../services/coffee-category/coffee-category';
 import { Coffee, CoffeeCategoryApiResponse, CoffeesApiResponse } from '../../models/coffee.model';
 import { FormsModule } from '@angular/forms';
@@ -10,7 +10,7 @@ import { CartItemService } from '../../services/cart-item/cart-item';
 
 @Component({
   selector: 'app-coffee-items',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,RouterLink],
   standalone: true, // optional if using standalone components
   templateUrl: './coffee-items.html',
   styleUrls: ['./coffee-items.css']

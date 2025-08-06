@@ -4,7 +4,7 @@ import { Auth } from '../../services/auth/auth';
 import { IAuthResponse, ILogin, IRegister } from '../../models/auth.model';
 import { FormsModule } from '@angular/forms';
 import { Token } from '@angular/compiler';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-login',
   imports: [CommonModule, FormsModule],
@@ -30,6 +30,9 @@ export class Login {
   loginObj: ILogin = {
     email: '',
     password: ''
+  }
+  backToHome() {
+    this.router.navigateByUrl('/home');
   }
 
   onLogin() {

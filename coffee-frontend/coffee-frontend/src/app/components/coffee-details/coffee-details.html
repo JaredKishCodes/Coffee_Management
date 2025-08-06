@@ -1,0 +1,27 @@
+<div class="bg-amber-900 w-screen h-screen p-20">
+  <div class="container mx-auto">
+    
+    <div class="card bg-base-100 shadow-lg flex flex-row items-start overflow-hidden">
+      
+      <!-- 📸 Image Section -->
+      <div class="w-1/2 h-full">
+        <img [src]="coffee.imageUrl" alt="{{ coffee.name }}" class="object-cover w-full h-full">
+      </div>
+
+      <!-- 📄 Text Content Section -->
+      <div class="w-1/2 p-6">
+        <div class="card-body">
+          <h2 class="card-title text-3xl mb-2">{{ coffee.name }}</h2>
+          <p class="text-gray-700 mb-4">{{ coffee.description }}</p>
+          <p class="text-xl font-bold text-green-600 mb-2">₱{{ coffee.price }}</p>
+          <p class="text-sm text-gray-500">Category: {{ coffee.category?.name }}</p>
+
+          <!-- Optional: Add to cart controls -->
+         
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
