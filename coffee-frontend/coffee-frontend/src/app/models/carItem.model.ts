@@ -25,10 +25,7 @@ export interface AddCartItemDto{
     cartId : number;
 }
 export interface CartItemDto {
-  id: number;
-  coffeeItemId: number;
-  coffeeItem?: string;
-  quantity: number;
-  unitPrice: number;
-  total: number;
+  success: boolean;
+  message: string;
+  data: CartItem;
 }

@@ -1,23 +1,43 @@
-<div class="bg-amber-900 w-screen h-screen p-20">
-  <div class="container mx-auto">
+
+<ng-container *ngIf="showSuccess" [ngTemplateOutlet]="addToCartSuccess"></ng-container>
+
+<ng-template #addToCartSuccess>
+  <div class="toast toast-top toast-center">
+    <div class="alert alert-success">
+      <span>Added to Cart successfully!</span>
+    </div>
+  </div>
+</ng-template>
+
+
+
+<div class="bg-amber-900 w-screen min-h-screen p-4 md:p-20">
+  <div class="container mx-auto pt-10">
     
-    <div class="card bg-base-100 shadow-lg flex flex-row items-start overflow-hidden">
-      
+    <div class="card bg-base-100 shadow-lg flex flex-col md:flex-row items-start overflow-hidden p-4 md:p-10">
+
       <!-- 📸 Image Section -->
-      <div class="w-1/2 h-full">
-        <img [src]="coffee.imageUrl" alt="{{ coffee.name }}" class="object-cover w-full h-full">
+      <div class="w-full md:w-1/2 h-64 md:h-auto mb-4 md:mb-0">
+        <img [src]="coffee.imageUrl" alt="{{ coffee.name }}"
+          class="object-cover w-full h-full border-4 border-b-amber-950 rounded-lg" />
       </div>
 
       <!-- 📄 Text Content Section -->
-      <div class="w-1/2 p-6">
-        <div class="card-body">
-          <h2 class="card-title text-3xl mb-2">{{ coffee.name }}</h2>
-          <p class="text-gray-700 mb-4">{{ coffee.description }}</p>
-          <p class="text-xl font-bold text-green-600 mb-2">₱{{ coffee.price }}</p>
-          <p class="text-sm text-gray-500">Category: {{ coffee.category?.name }}</p>
+      <div class=" mt-3 w-full md:w-1/2 md:pl-6">
+        <div class="card-body p-0">
+          <h2 class="card-title text-3xl md:text-4xl mb-4">{{ coffee.name }}</h2>
+          <p class="text-lg md:text-xl mb-4">{{ coffee.description }}</p>
+          <p class="text-2xl font-bold mb-2">₱{{ coffee.price }}</p>
+          <p class="text-base md:text-lg">Category: {{ coffee.category.name }}</p>
+          <p class="text-base md:text-lg mb-4">Stocks: {{ coffee.stock }} left</p>
 
-          <!-- Optional: Add to cart controls -->
-         
+          <div class="flex items-center mb-4">
+            <label for="quantity" class="text-base md:text-lg font-semibold mr-2">Quantity:</label>
+            <input id="quantity" type="number" name="quantity" [(ngModel)]="quantity" min="1"
+              class="input input-bordered w-24" />
+          </div>
+
+          <button class="btn btn-primary w-full md:w-auto mt-22" (click)="addToCart()">Add To Cart</button>
         </div>
       </div>
 

@@ -4,7 +4,7 @@
 html, body {
   margin: 0;
   padding: 0;
- overflow: hidden;  /* Ensure no scrollbars ever appear */
+   /* Ensure no scrollbars ever appear */
  scrollbar-gutter: auto !important;
   height: 100%;
   
