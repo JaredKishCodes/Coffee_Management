@@ -13,12 +13,7 @@
           <p class="text-sm ">Category: {{ coffee.category.name }}</p>
           <small>{{ coffee.description }}</small>
           <div  class="flex items-center gap-2">
-        <button class="btn btn-sm" >-</button>
-        <span class="font-bold">
-          
-        </span>
-        <button class="btn btn-sm" >+</button>
-      </div>
+     
 
           <div class="card-actions justify-end">
             <button class="btn btn-secondary" [routerLink]="['/coffee', coffee.id]">View Details</button>

@@ -8,7 +8,7 @@ namespace CoffeeManagementSystem.Application.DTOs.Cart
     {
         
         public required string CustomerName { get; set; }
-        public ICollection<AddCartItemDto> CartItems { get; set; } = new List<AddCartItemDto>();
+        public ICollection<AddCartItemRequest> CartItems { get; set; } = new List<AddCartItemRequest>();
 
     }
 }

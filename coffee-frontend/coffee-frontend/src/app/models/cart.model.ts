@@ -1,11 +1,11 @@
-export interface AddCartItemDto {
+export interface AddCartItemRequest{
   coffeeItemId: number;
   quantity: number;
 }
 
 export interface AddCartDto {
   customerName: string;
-  cartItems: AddCartItemDto[];
+  cartItems: AddCartItemRequest[];
 }
 
 

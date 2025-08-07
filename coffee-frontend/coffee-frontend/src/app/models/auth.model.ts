@@ -10,5 +10,10 @@ export interface IRegister{
     confirmPassword:string;
 }
 
-export interface IAuthResponse {
-    token: string;}
+    export interface IAuthResponse {
+  success: boolean;
+  message: string;
+  token: string;
+  email: string;
+  fullName: string;
+}

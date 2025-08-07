@@ -20,10 +20,11 @@ export interface Cart {
 }
 
 export interface AddCartItemDto{
-    coffeeItemId : number;
-    quantity : number;
-    cartId : number;
+    coffeeItemId: number;
+    quantity: number;
+    cartId: number;
 }
+
 export interface CartItemDto {
   success: boolean;
   message: string;

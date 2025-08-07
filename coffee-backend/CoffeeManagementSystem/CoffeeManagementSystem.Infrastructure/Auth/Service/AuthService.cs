@@ -2,6 +2,7 @@
 using CoffeeManagementSystem.Application.DTOs.Auth;
 using CoffeeManagementSystem.Application.Interfaces.Auth;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeManagementSystem.Infrastructure.Auth.Service
 {
@@ -56,14 +57,26 @@ namespace CoffeeManagementSystem.Infrastructure.Auth.Service
                 FullName = registerDto.FullName
             };
 
-            var createResult = await _userManager.CreateAsync(newUser, registerDto.Password);
-            if (!createResult.Succeeded)
+            var createdUser = await _userManager.CreateAsync(newUser, registerDto.Password);
+            if (!createdUser.Succeeded)
             {
-                var errors = string.Join(", ", createResult.Errors.Select(e => e.Description));
+                var errors = string.Join(", ", createdUser.Errors.Select(e => e.Description));
                 throw new ApplicationException($"User creation failed: {errors}");
             }
 
-    
+            var usersCount = await _userManager.Users.CountAsync();
+
+            if (usersCount == 1)
+            {
+                await _userManager.AddToRoleAsync(newUser, "Admin");
+            }
+            else
+            {
+                await _userManager.AddToRoleAsync(newUser, "Customer");
+            }
+
+
+
 
             var roles = await _userManager.GetRolesAsync(newUser);
             // Generate JWT
@@ -78,6 +91,7 @@ namespace CoffeeManagementSystem.Infrastructure.Auth.Service
             {
                 Token = token,
                 Email = newUser.Email,
+                FullName = newUser.FullName
                
             };
         }

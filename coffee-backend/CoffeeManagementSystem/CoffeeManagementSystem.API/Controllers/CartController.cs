@@ -64,23 +64,33 @@ namespace CoffeeManagementSystem.API.Controllers
         [HttpPost("AddCart")]
         public async Task<ActionResult<ApiResponse<CartDto>>> AddCartAsync([FromBody] AddCartDto addCartDto)
         {
-            var createdCart = await _cartService.AddCartAsync(addCartDto);
-            if (createdCart == null)
+            try
             {
-                return BadRequest(new ApiResponse<CartDto>
+                var createdCart = await _cartService.AddCartAsync(addCartDto);
+                if (createdCart == null)
                 {
-                    Success = false,
-                    Message = "Failed to create cart",
-                    Data = null
+                    return BadRequest(new ApiResponse<CartDto>
+                    {
+                        Success = false,
+                        Message = "Failed to create cart",
+                        Data = null
+                    });
+                }
+
+                return CreatedAtAction(nameof(GetCartById), new { id = createdCart.Id }, new ApiResponse<CartDto>
+                {
+                    Success = true,
+                    Message = "Cart created successfully",
+                    Data = createdCart
                 });
             }
-
-            return CreatedAtAction(nameof(GetCartById), new { id = createdCart.Id }, new ApiResponse<CartDto>
+            catch (Exception ex)
             {
-                Success = true,
-                Message = "Cart created successfully",
-                Data = createdCart
-            });
+
+                Console.WriteLine("Error: " + ex.Message);
+                return StatusCode(500, "Internal server error");
+            }
+           
         }
 
         [HttpPut("UpdateCart/{id}")]
