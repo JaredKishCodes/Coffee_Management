@@ -13,11 +13,7 @@ namespace CoffeeManagementSystem.Application.Services
     {
         public async Task<CartDto?> AddCartAsync(AddCartDto addCartDto)
         {
-            var cart = new Cart
-            {
-                CustomerName = addCartDto.CustomerName,
-                CartItems = new List<CartItem>()
-            };
+            var cart = await _cartRepo.GetOrCreateCartAsync();
 
             foreach (var itemDto in addCartDto.CartItems)
             {
@@ -27,19 +23,30 @@ namespace CoffeeManagementSystem.Application.Services
                     throw new Exception($"CoffeeItem with ID {itemDto.CoffeeItemId} not found.");
                 }
 
-                cart.CartItems.Add(new CartItem
+                var existingItem =  cart.CartItems.FirstOrDefault(c => c.CoffeeItemId == itemDto.CoffeeItemId);
+                if (existingItem != null) 
                 {
-                    CoffeeItemId = itemDto.CoffeeItemId,
-                    Quantity = itemDto.Quantity,
-                    CoffeeItem = coffeeItem,
-                    UnitPrice = coffeeItem.Price,
-                    Total = itemDto.Quantity * coffeeItem.Price
-                });
+                    existingItem.Quantity += itemDto.Quantity;
+                    existingItem.Total = itemDto.Quantity * existingItem.UnitPrice;
+
+                }
+
+                else
+                {
+                    cart.CartItems.Add(new CartItem
+                    {
+                        CoffeeItemId = itemDto.CoffeeItemId,
+                        Quantity = itemDto.Quantity,
+                        CoffeeItem = coffeeItem,
+                        UnitPrice = coffeeItem.Price,
+                        Total = itemDto.Quantity * coffeeItem.Price
+                    });
+                }
             }
 
             cart.TotalPrice = cart.CartItems.Sum(i => i.Total);
 
-            var result = await _cartRepo.AddCartAsync(cart);
+            var result = await _cartRepo.UpdateCartAsync(cart);
             if (result == null)
             {
                 return null;
@@ -114,6 +121,8 @@ namespace CoffeeManagementSystem.Application.Services
                 }).ToList()
             });
         }
+
+       
 
         public async Task<CartDto?> UpdateCartAsync(int id, AddCartDto addCartDto)
         {

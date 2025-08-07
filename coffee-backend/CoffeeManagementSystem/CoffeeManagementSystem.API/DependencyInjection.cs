@@ -18,6 +18,8 @@ namespace CoffeeManagementSystem.API
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+            services.AddHttpContextAccessor();
+
 
             services.AddInfrastructureServices(configuration)
                     .AddApplicationServices() ;

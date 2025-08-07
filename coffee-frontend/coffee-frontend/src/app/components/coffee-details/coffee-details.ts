@@ -45,15 +45,15 @@ export class CoffeeDetails implements OnInit {
       cartId: 0 // This will be set by the backend
     };
 
-    const userString = localStorage.getItem('user');
-    const user = userString ? JSON.parse(userString) : null;
+    const authString = localStorage.getItem('auth');
+    const auth = authString ? JSON.parse(authString) : null;
 
-    if (!user) {
+    if (!auth) {
       console.error('No user info found');
       return;
     }
 
-    const fullName = user.fullName;
+    const fullName = auth.fullName;
 
     this.cartService.createCart(fullName, cartItemData).subscribe({
       next: (cartResponse: CartResponse) => {

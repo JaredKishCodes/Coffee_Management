@@ -39,16 +39,17 @@ export class Login {
     console.log('Login attempt with:', this.loginObj);
     this.authService.login(this.loginObj).subscribe({
       next: (response: IAuthResponse) => {
+        localStorage.setItem('auth', JSON.stringify(response));
         console.log('Login response:', response);
         console.log('Setting showLoginSuccess to true');
         this.showLoginSuccess = true;
-        localStorage.setItem('token', response.token);
+        
 
         setTimeout(() => {
           console.log('Hiding login success alert');
           this.showLoginSuccess = false;
           this.router.navigateByUrl('/menu');
-        }, 4000); // Increased from 2000 to 4000ms
+        }, 2000); // Increased from 2000 to 4000ms
       },
       error: (error) => {
         console.log('Login error, setting showLoginError to true');
@@ -65,15 +66,10 @@ export class Login {
 
   onRegister() {
     this.authService.register(this.registerObj).subscribe({
-      next: (response) => {
+      next: (response : IAuthResponse) => {
         console.log('Registration successful', response);
 
-         const user = {
-        fullName: response.fullName,
-        email: response.email,
-        token: response.token
-      };
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('auth', JSON.stringify(response));
 
         this.showSuccess = true;
         this.showLogin = true;

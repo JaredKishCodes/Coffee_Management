@@ -29,6 +29,7 @@ namespace CoffeeManagementSystem.Infrastructure
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ICartItemRepo, CartItemRepo>();
             services.AddScoped<ICartRepo, CartRepo>();
+        
 
 
 

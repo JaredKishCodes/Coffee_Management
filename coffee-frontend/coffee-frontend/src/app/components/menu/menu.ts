@@ -48,7 +48,15 @@ export class Menu implements OnInit {
     console.error('Category ID is undefined');
     return;
   }
-    const token = localStorage.getItem('token');
+    const authData = localStorage.getItem('auth');
+    let token : string | null = null;
+    if (authData) {
+      try {
+        token = JSON.parse(authData).token;
+      } catch {
+        token = null;
+      }
+    }
     if (token) {
       this.router.navigate(['/coffees', catId]);
     }

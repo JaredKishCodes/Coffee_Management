@@ -1,34 +1,43 @@
-<ng-container *ngIf="showSuccess" [ngTemplateOutlet]="registerSuccess"></ng-container>
+
+
+
+@if (showSuccess) {
+  <ng-container [ngTemplateOutlet]="registerSuccess"></ng-container>
+}
 
 <ng-template #registerSuccess>
-  <div class="toast toast-top toast-center">
+  <div class="toast toast-top toast-center pt-17">
     <div class="alert alert-success">
       <span>Registered successfully!</span>
     </div>
   </div>
 </ng-template>
 
-<ng-container *ngIf="showLoginSuccess" [ngTemplateOutlet]="loginSuccess"></ng-container>
+@if (showLoginSuccess) {
+  <ng-container [ngTemplateOutlet]="loginSuccess"></ng-container>
+}
+
 <ng-template #loginSuccess>
-  <div class="toast toast-top toast-center">
+  <div class="toast toast-top toast-center pt-17">
     <div class="alert alert-success">
       <span>Login success!</span>
     </div>
   </div>
 </ng-template>
 
-<ng-container *ngIf="showLoginError" [ngTemplateOutlet]="loginError"></ng-container>
+@if (showLoginError) {
+  <ng-container [ngTemplateOutlet]="loginError"></ng-container>
+}
+
 <ng-template #loginError>
-  <div class="toast toast-top toast-center">
+  <div class="toast toast-top toast-center pt-17">
     <div class="alert alert-error">
       <span>Invalid user credentials</span>
     </div>
   </div>
 </ng-template>
 
-
-
-<ng-container *ngIf="!showLogin; else content">
+@if (!showLogin) {
   <div class="hero min-h-screen" style="background-image: url('https://wallpaperaccess.com/full/9524787.jpg');">
     <div class="flex justify-center pt-1 pb-40 w-full">
       <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-10">
@@ -48,11 +57,13 @@
           Don’t have an account?
         </p>
 
-        <button class="btn btn-ghost mt-4 w-full" >Back</button>
+        <button class="btn btn-ghost mt-4 w-full">Back</button>
       </fieldset>
     </div>
   </div>
-</ng-container>
+} @else {
+  <ng-template [ngTemplateOutlet]="content"></ng-template>
+}
 
 <ng-template #content>
   <div class="hero min-h-screen" style="background-image: url('https://wallpaperaccess.com/full/9524787.jpg');">
