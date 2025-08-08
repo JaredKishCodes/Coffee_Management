@@ -65,7 +65,7 @@ namespace CoffeeManagementSystem.Infrastructure.Repositories
                 throw new UnauthorizedAccessException("User is not authenticated");
 
             string? userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            string? customerName = user.Identity?.Name; // Or use ClaimTypes.Name
+            string? customerName = user.FindFirst(ClaimTypes.Name).Value;
 
             if (string.IsNullOrEmpty(userId))
                 throw new Exception("User ID not found in claims");

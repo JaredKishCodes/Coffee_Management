@@ -53,15 +53,21 @@ export class CoffeeDetails implements OnInit {
       return;
     }
 
-    const fullName = auth.fullName;
+    const customerName = auth.fullName;
+    const cartId = auth.cartId;
+    if (cartId) {
+      cartItemData.cartId = cartId; // Use existing cart ID if available
+    }
+   
 
-    this.cartService.createCart(fullName, cartItemData).subscribe({
+    this.cartService.createCart(customerName, cartItemData).subscribe({
       next: (cartResponse: CartResponse) => {
+        console.log(customerName)
         if (cartResponse.success) {
           const cartId = cartResponse.data.id.toString();
           localStorage.setItem('cartId', cartId);
           this.showSuccess = true;
-          console.log('Cart created successfully:', cartResponse.data);
+          console.log('Added to cart successfully:', cartResponse.data);
         } else {
           console.error('Failed to create cart:', cartResponse.message);
         }

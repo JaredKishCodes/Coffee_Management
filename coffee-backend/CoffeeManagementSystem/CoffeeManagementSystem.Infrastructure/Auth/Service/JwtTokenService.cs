@@ -23,7 +23,7 @@ namespace CoffeeManagementSystem.Infrastructure.Auth.Service
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email ?? string.Empty),
-                new Claim("FullName", user.FullName)
+                 new Claim(ClaimTypes.Name, user.FullName)
             };
 
             // Add role claims
