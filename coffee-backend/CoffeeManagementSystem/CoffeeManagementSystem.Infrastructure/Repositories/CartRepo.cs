@@ -94,6 +94,7 @@ namespace CoffeeManagementSystem.Infrastructure.Repositories
         {
             var existingCart = await _context.Carts
                 .Include(c => c.CartItems)
+                .ThenInclude(c =>c.CoffeeItem)
                 .FirstOrDefaultAsync(c => c.Id == cart.Id);
 
             if (existingCart == null) return null;

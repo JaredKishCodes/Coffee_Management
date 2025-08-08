@@ -12,6 +12,7 @@ export interface AddCartDto {
 
 export interface CartItemDto {
   id: number;
+  coffeeName: string; 
   coffeeItemImg : string;
   coffeeItemId: number;
   quantity: number;

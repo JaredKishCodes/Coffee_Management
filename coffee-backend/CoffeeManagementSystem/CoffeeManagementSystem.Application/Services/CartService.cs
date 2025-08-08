@@ -14,6 +14,8 @@ namespace CoffeeManagementSystem.Application.Services
         public async Task<CartDto?> AddCartAsync(AddCartDto addCartDto)
         {
             var cart = await _cartRepo.GetOrCreateCartAsync();
+            if (cart == null)
+                throw new ArgumentException("Cart not found");
 
             foreach (var itemDto in addCartDto.CartItems)
             {
@@ -27,7 +29,7 @@ namespace CoffeeManagementSystem.Application.Services
                 if (existingItem != null) 
                 {
                     existingItem.Quantity += itemDto.Quantity;
-                    existingItem.Total = itemDto.Quantity * existingItem.UnitPrice;
+                    existingItem.Total = existingItem.Quantity * existingItem.UnitPrice;
 
                 }
 
@@ -43,6 +45,8 @@ namespace CoffeeManagementSystem.Application.Services
                     });
                 }
             }
+
+           
 
             cart.TotalPrice = cart.CartItems.Sum(i => i.Total);
 
@@ -60,11 +64,12 @@ namespace CoffeeManagementSystem.Application.Services
                 CartItems = result.CartItems.Select(item => new CartItemDto
                 {
                     Id = item.Id,
+                    CoffeeName = item.CoffeeItem.Name,
                     CoffeeItemId = item.CoffeeItemId,
                     CoffeeItemImg = item.CoffeeItem.ImageUrl,
                     Quantity = item.Quantity,
+                    UnitPrice = item.UnitPrice,
                     Total = item.Total,
-                    CoffeeItem = item.CoffeeItem?.Name ?? "Unknown"
                 }).ToList()
             };
         }
@@ -96,10 +101,11 @@ namespace CoffeeManagementSystem.Application.Services
                 {
                     Id = item.Id,
                     CoffeeItemId = item.CoffeeItemId,
+                    CoffeeName = item.CoffeeItem.Name,
                     CoffeeItemImg = item.CoffeeItem.ImageUrl,
                     Quantity = item.Quantity,
+                    UnitPrice = item.UnitPrice,
                     Total = item.Total,
-                    CoffeeItem = item.CoffeeItem?.Name ?? "Unknown"
                 }).ToList()
             };
         }
@@ -116,11 +122,12 @@ namespace CoffeeManagementSystem.Application.Services
                 CartItems = cart.CartItems.Select(item => new CartItemDto
                 {
                     Id = item.Id,
+                    CoffeeName = item.CoffeeItem.Name,
                     CoffeeItemId = item.CoffeeItemId,
                     CoffeeItemImg = item.CoffeeItem.ImageUrl,
                     Quantity = item.Quantity,
+                    UnitPrice = item.UnitPrice,
                     Total = item.Total,
-                    CoffeeItem = item.CoffeeItem?.Name ?? "Unknown"
                 }).ToList()
             });
         }
@@ -148,6 +155,10 @@ namespace CoffeeManagementSystem.Application.Services
             foreach (var item in updatedCart.CartItems)
             {
                 var coffee = await _coffeeItemRepo.GetCoffeeItemByIdAsync(item.CoffeeItemId);
+                if(coffee == null)
+                {
+                    throw new ArgumentException("Coffee Id not found");
+                }
                 item.UnitPrice = coffee.Price;
                 item.Total = item.UnitPrice * item.Quantity;
             }
@@ -166,11 +177,11 @@ namespace CoffeeManagementSystem.Application.Services
                 {
                     Id = item.Id,
                     CoffeeItemId = item.CoffeeItemId,
+                    CoffeeName = item.CoffeeItem.Name,
                     CoffeeItemImg = item.CoffeeItem.ImageUrl,
                     Quantity = item.Quantity,
                     UnitPrice = item.UnitPrice,
                     Total = item.Total,
-                    CoffeeItem = item.CoffeeItem.Name
                 }).ToList()
             };
         }

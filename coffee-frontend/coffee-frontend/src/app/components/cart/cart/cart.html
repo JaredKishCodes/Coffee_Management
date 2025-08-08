@@ -23,7 +23,7 @@
             @for (item of cart.cartItems; track $index) {
               <tr>
                  <img src="{{item.coffeeItemImg}}" alt="Coffee Image" class="w-20 h-20 object-cover rounded ml-3" />
-                <td>{{ item.coffeeItemId }}</td>
+                <td>{{ item.coffeeName }}</td>
                 <td>{{ item.unitPrice }}</td>
                 <td>{{ item.quantity }}</td>
                 <td>{{ item.unitPrice * item.quantity }}</td>

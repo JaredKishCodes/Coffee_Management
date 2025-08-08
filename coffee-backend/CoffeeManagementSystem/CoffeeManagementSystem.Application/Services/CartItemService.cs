@@ -73,6 +73,7 @@ namespace CoffeeManagementSystem.Application.Services
             return new CartItemDto
             {
                 Id = addedItem.Id,
+                CoffeeName = addedItem.CoffeeItem.Name,
                 CoffeeItemImg = addedItem.CoffeeItem.ImageUrl,
                 CoffeeItemId = addedItem.CoffeeItem.Id,
                 Quantity = addedItem.Quantity,
@@ -101,6 +102,7 @@ namespace CoffeeManagementSystem.Application.Services
             return new CartItemDto
             {
                 Id = cartItem.Id,
+                CoffeeName = cartItem.CoffeeItem.Name,
                 CoffeeItemId = cartItem.CoffeeItem.Id,
                 CoffeeItemImg = cartItem.CoffeeItem.ImageUrl,
                 Quantity = cartItem.Quantity,
@@ -116,6 +118,7 @@ namespace CoffeeManagementSystem.Application.Services
             return cartItems.Select(item => new CartItemDto
             {
                 Id = item.Id,
+                CoffeeName = item.CoffeeItem.Name,
                 CoffeeItemId = item.CoffeeItem.Id,
                 CoffeeItemImg = item.CoffeeItem.ImageUrl,
                 Quantity = item.Quantity,
@@ -146,6 +149,7 @@ namespace CoffeeManagementSystem.Application.Services
             return new CartItemDto
             {
                 Id = updatedItem.Id,
+                CoffeeName = updatedItem.CoffeeItem.Name,
                 CoffeeItemId = updatedItem.CoffeeItem.Id,
                 CoffeeItemImg = updatedItem.CoffeeItem.ImageUrl,
                 Quantity = updatedItem.Quantity,
