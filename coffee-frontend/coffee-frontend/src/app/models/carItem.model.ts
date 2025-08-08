@@ -15,7 +15,7 @@ export interface Cart {
   id: number;
   customerName: string;
   totalPrice: number;
-  createdAt: string; // or `Date` if you parse it
+  createdAt?: string; // or `Date` if you parse it
   cartItems: CartItem[];
 }
 
