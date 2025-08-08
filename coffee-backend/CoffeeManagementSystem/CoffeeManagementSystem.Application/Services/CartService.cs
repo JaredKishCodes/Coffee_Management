@@ -61,6 +61,7 @@ namespace CoffeeManagementSystem.Application.Services
                 {
                     Id = item.Id,
                     CoffeeItemId = item.CoffeeItemId,
+                    CoffeeItemImg = item.CoffeeItem.ImageUrl,
                     Quantity = item.Quantity,
                     Total = item.Total,
                     CoffeeItem = item.CoffeeItem?.Name ?? "Unknown"
@@ -95,6 +96,7 @@ namespace CoffeeManagementSystem.Application.Services
                 {
                     Id = item.Id,
                     CoffeeItemId = item.CoffeeItemId,
+                    CoffeeItemImg = item.CoffeeItem.ImageUrl,
                     Quantity = item.Quantity,
                     Total = item.Total,
                     CoffeeItem = item.CoffeeItem?.Name ?? "Unknown"
@@ -115,6 +117,7 @@ namespace CoffeeManagementSystem.Application.Services
                 {
                     Id = item.Id,
                     CoffeeItemId = item.CoffeeItemId,
+                    CoffeeItemImg = item.CoffeeItem.ImageUrl,
                     Quantity = item.Quantity,
                     Total = item.Total,
                     CoffeeItem = item.CoffeeItem?.Name ?? "Unknown"
@@ -163,6 +166,7 @@ namespace CoffeeManagementSystem.Application.Services
                 {
                     Id = item.Id,
                     CoffeeItemId = item.CoffeeItemId,
+                    CoffeeItemImg = item.CoffeeItem.ImageUrl,
                     Quantity = item.Quantity,
                     UnitPrice = item.UnitPrice,
                     Total = item.Total,

@@ -1,7 +1,9 @@
-<ng-container *ngIf="showSuccess" [ngTemplateOutlet]="addToCartSuccess"></ng-container>
 
+@if (showSuccess) {
+  <ng-container  [ngTemplateOutlet]="addToCartSuccess"></ng-container>
+}
 <ng-template #addToCartSuccess>
-  <div class="toast toast-top toast-center">
+  <div class="toast toast-top toast-center pt-14">
     <div class="alert alert-success">
       <span>Added to Cart successfully!</span>
     </div>

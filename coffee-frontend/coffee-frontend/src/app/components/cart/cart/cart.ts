@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CartService } from '../../../services/cart-service';
+import { CartService } from '../../../services/cart/cart-service';
 import { CartDto } from '../../../models/cart.model';
 import { CommonModule } from '@angular/common';
 

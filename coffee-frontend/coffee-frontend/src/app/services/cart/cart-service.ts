@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { AddCartDto, CartResponse, AddCartItemRequest } from '../../models/cart.model';
 import { AddCartItemDto } from '../../models/carItem.model';
 import { Observable } from 'rxjs';
+import { CartDto } from '../../models/cart.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,4 +30,9 @@ export class CartService {
     };
     return this.http.post<CartResponse>(`${this.apiUrl}/AddCart`, addCartDto);
   }
+
+  getCartById(id:number):Observable<CartDto>{
+    return this.http.get<CartDto>(`${this.apiUrl}/GetCartById/${id}`)
+   }
+
 }

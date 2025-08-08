@@ -15,6 +15,7 @@ namespace CoffeeManagementSystem.Infrastructure.Repositories
 
             return await _context.CartItems
         .Include(c => c.Cart)
+        .Include(c => c.CoffeeItem)
         .FirstOrDefaultAsync(c => c.Id == cartItem.Id);
         }
 

@@ -9,6 +9,7 @@ namespace CoffeeManagementSystem.Domain.Entities
         public Cart Cart { get; set; } = null!; 
 
         public int CoffeeItemId { get; set; }
+        public string? CoffeeItemImg { get; set; }
         public CoffeeItem CoffeeItem { get; set; } = null!; 
 
         public int Quantity { get; set; }

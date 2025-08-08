@@ -41,7 +41,8 @@ namespace CoffeeManagementSystem.Application.Services
                 return new CartItemDto
                 {
                     Id = updatedItem.Id,
-                    CoffeeItemId = updatedItem.CoffeeItemId,
+                    CoffeeItemId = updatedItem.CoffeeItem.Id,
+                    CoffeeItemImg = updatedItem.CoffeeItem.ImageUrl,
                     Quantity = updatedItem.Quantity,
                     UnitPrice = updatedItem.UnitPrice,
                     Total = updatedItem.UnitPrice * updatedItem.Quantity
@@ -51,6 +52,7 @@ namespace CoffeeManagementSystem.Application.Services
             logger.LogInformation($"Adding new cart item - CoffeeItemId: {cartItemDto.CoffeeItemId}, Quantity: {cartItemDto.Quantity}, CartId: {cartItemDto.CartId}");
             Console.WriteLine($"CoffeeItemId: {cartItemDto.CoffeeItemId}, Quantity: {cartItemDto.Quantity}, CartId: {cartItemDto.CartId}");
             Console.WriteLine($"Coffee found: {coffee?.Name ?? "NULL"}");
+            logger.LogInformation($"Coffee found: {coffee?.Name}");
 
             var cartItemEntity = new CartItem
             {
@@ -66,13 +68,15 @@ namespace CoffeeManagementSystem.Application.Services
 
             var addedItem = await _cartItemRepo.AddCartItemAsync(cartItemEntity);
             if (addedItem == null) return null;
+            Console.WriteLine($"Coffee Item URl found: {coffee.ImageUrl ?? "NULL"}");
 
             return new CartItemDto
             {
                 Id = addedItem.Id,
-                CoffeeItemId = addedItem.CoffeeItemId,
+                CoffeeItemImg = addedItem.CoffeeItem.ImageUrl,
+                CoffeeItemId = addedItem.CoffeeItem.Id,
                 Quantity = addedItem.Quantity,
-                UnitPrice = coffee.Price,
+                UnitPrice = addedItem.UnitPrice,
                 Total = coffee.Price * addedItem.Quantity
             };
         }
@@ -97,7 +101,8 @@ namespace CoffeeManagementSystem.Application.Services
             return new CartItemDto
             {
                 Id = cartItem.Id,
-                CoffeeItemId = cartItem.CoffeeItemId,
+                CoffeeItemId = cartItem.CoffeeItem.Id,
+                CoffeeItemImg = cartItem.CoffeeItem.ImageUrl,
                 Quantity = cartItem.Quantity,
                 UnitPrice = cartItem.UnitPrice,
                 Total = cartItem.UnitPrice * cartItem.Quantity
@@ -111,7 +116,8 @@ namespace CoffeeManagementSystem.Application.Services
             return cartItems.Select(item => new CartItemDto
             {
                 Id = item.Id,
-                CoffeeItemId = item.CoffeeItemId,
+                CoffeeItemId = item.CoffeeItem.Id,
+                CoffeeItemImg = item.CoffeeItem.ImageUrl,
                 Quantity = item.Quantity,
                 UnitPrice = item.UnitPrice,
                 Total = item.UnitPrice * item.Quantity
@@ -140,7 +146,8 @@ namespace CoffeeManagementSystem.Application.Services
             return new CartItemDto
             {
                 Id = updatedItem.Id,
-                CoffeeItemId = updatedItem.CoffeeItemId,
+                CoffeeItemId = updatedItem.CoffeeItem.Id,
+                CoffeeItemImg = updatedItem.CoffeeItem.ImageUrl,
                 Quantity = updatedItem.Quantity,
                 UnitPrice = updatedItem.UnitPrice,
                 Total = updatedItem.UnitPrice * updatedItem.Quantity

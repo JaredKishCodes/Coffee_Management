@@ -1,32 +1,51 @@
 <div class="bg-amber-900 w-screen min-h-screen p-4 md:p-20">
   <div class="container mx-auto pt-10 text-black">
-    <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
-      <h1 class="flex justify-center text-3xl font-bold text-amber-700 pt-5 pb-10">
-        My Cart
-      </h1>
+    <!-- Two cards side by side on desktop, stacked on mobile -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-      <table class="table">
-        <!-- head -->
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Total</th>
-          </tr>
-        </thead>
+      <!-- Left Card: Cart Items -->
+      <div class=" col-span-2 rounded-lg border border-base-content/5 bg-base-100 p-6 shadow">
+        <h1 class="flex justify-center text-3xl font-bold text-amber-700 pb-6">
+          My Cart
+        </h1>
 
-        <tbody>
-          @for (item of cart.cartItems; track $index) {
+        <table class="table w-full">
+          <thead>
             <tr>
-              <th>{{ item.coffeeItemId }}</th>
-              <td>{{ item.unitPrice }}</td>
-              <td>{{ item.quantity }}</td>
-              <td>{{ item.unitPrice * item.quantity }}</td>
+              <th>Image</th>
+              <th>Item</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
             </tr>
-          }
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            @for (item of cart.cartItems; track $index) {
+              <tr>
+                 <img src="{{item.coffeeItemImg}}" alt="Coffee Image" class="w-20 h-20 object-cover rounded ml-3" />
+                <td>{{ item.coffeeItemId }}</td>
+                <td>{{ item.unitPrice }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.unitPrice * item.quantity }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Right Card: Cart Totals -->
+      <div class="rounded-lg border border-base-content/5 bg-base-100 p-6 shadow w-90">
+        <h2 class="text-xl font-bold mb-4">Cart Totals</h2>
+        <div class="flex justify-between border-b pb-2 mb-2">
+          <span>Subtotal:</span>
+          <span>{{ cart.totalPrice }}</span>
+        </div>
+        <div class="flex justify-between font-bold text-lg">
+          <span>Total:</span>
+          <span>{{ cart.totalPrice }}</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
