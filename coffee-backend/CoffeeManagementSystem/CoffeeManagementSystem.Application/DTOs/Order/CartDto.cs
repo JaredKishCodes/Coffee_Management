@@ -8,6 +8,7 @@ namespace CoffeeManagementSystem.Application.DTOs.Order
     public class CartDto
     {
         public int Id { get; set; }
+     
         public required string CustomerName { get; set; }
 
         public decimal TotalPrice { get; set; }

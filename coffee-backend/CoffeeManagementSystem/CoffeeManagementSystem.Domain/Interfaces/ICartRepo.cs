@@ -8,6 +8,7 @@ namespace CoffeeManagementSystem.Domain.Interfaces
     {
         Task<IEnumerable<Cart>> GetCartsAsync();
         Task<Cart?> GetCartByIdAsync(int cartId);
+        Task<Cart?> GetCartByUserIdAsync(string userId);
         Task<Cart?> GetOrCreateCartAsync();
         Task<Cart?> AddCartAsync(Cart cart);
         Task<Cart?> UpdateCartAsync(Cart cart);

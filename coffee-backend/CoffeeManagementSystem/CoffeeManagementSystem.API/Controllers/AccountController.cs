@@ -52,7 +52,7 @@ namespace CoffeeManagementSystem.API.Controllers
         [ProducesResponseType(typeof(AuthResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<AuthResponseDto>> Login([FromBody] LoginDto loginDto)
+        public async Task<ActionResult<LoginResponse>> Login([FromBody] LoginDto loginDto)
         {
             if (!ModelState.IsValid)
             {
@@ -62,10 +62,11 @@ namespace CoffeeManagementSystem.API.Controllers
             try
             {
                 var response = await _authService.LoginAsync(loginDto);
-                return Ok(new AuthResponseDto
+                return Ok(new LoginResponse
                 {
                     Success = true,
                     Message = "Login successfully.",
+                    CartId = response.CartId,
                     Token = response.Token,
                     Email = response.Email,
                     FullName = response.FullName
@@ -73,7 +74,7 @@ namespace CoffeeManagementSystem.API.Controllers
             }
             catch (UnauthorizedAccessException ex)
             {
-                return Unauthorized(new AuthResponseDto
+                return Unauthorized(new LoginResponse
                 {
                     Success = false,
                     Message = ex.Message
@@ -81,7 +82,7 @@ namespace CoffeeManagementSystem.API.Controllers
             }
             catch (ApplicationException ex)
             {
-                return BadRequest(new AuthResponseDto
+                return BadRequest(new LoginResponse
                 {
                     Success = false,
                     Message = ex.Message

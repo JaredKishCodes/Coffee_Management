@@ -40,6 +40,7 @@ export class Login {
     this.authService.login(this.loginObj).subscribe({
       next: (response: IAuthResponse) => {
         localStorage.setItem('auth', JSON.stringify(response));
+        localStorage.setItem('cartId',response.cartId);
         console.log('Login response:', response);
         console.log('Setting showLoginSuccess to true');
         this.showLoginSuccess = true;

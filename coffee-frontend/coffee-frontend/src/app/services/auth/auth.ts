@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
+import { from, Observable, tap } from 'rxjs';
 import { IAuthResponse, ILogin, IRegister} from '../../models/auth.model';
 @Injectable({
   providedIn: 'root'

@@ -49,6 +49,14 @@ namespace CoffeeManagementSystem.Infrastructure.Repositories
                 .FirstOrDefaultAsync(c => c.Id == cartId);
         }
 
+        public async Task<Cart?> GetCartByUserIdAsync(string userId)
+        {
+            return await _context.Carts
+                .Include(ci => ci.CartItems)
+                .ThenInclude(c => c.CoffeeItem)
+                .FirstOrDefaultAsync(ui => ui.UserId == userId);
+        }
+
         public async Task<IEnumerable<Cart>> GetCartsAsync()
         {
             return await _context.Carts

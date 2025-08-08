@@ -13,6 +13,7 @@ export interface IRegister{
     export interface IAuthResponse {
   success: boolean;
   message: string;
+  cartId : string;
   token: string;
   email: string;
   fullName: string;

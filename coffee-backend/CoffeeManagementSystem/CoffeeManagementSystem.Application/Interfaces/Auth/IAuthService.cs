@@ -7,6 +7,6 @@ namespace CoffeeManagementSystem.Application.Interfaces.Auth
     public interface IAuthService
     {
         Task<AuthResponseDto> RegisterAsync(RegisterDto registerDto);
-        Task<AuthResponseDto> LoginAsync(LoginDto loginDto);
+        Task<LoginResponse> LoginAsync(LoginDto loginDto);
     }
 }
