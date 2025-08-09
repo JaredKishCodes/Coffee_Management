@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CoffeeInventoryDto } from '../../../models/inventory.model';
 import { InventoryService } from '../../../services/inventory/inventory-service';
 
@@ -8,7 +8,11 @@ import { InventoryService } from '../../../services/inventory/inventory-service'
   templateUrl: './inventory.html',
   styleUrl: './inventory.css'
 })
-export class Inventory {
+export class Inventory implements OnInit{
+
+  ngOnInit(): void {
+    this.getAllInventory()
+  }
 
   inventoryService = inject(InventoryService)
 
