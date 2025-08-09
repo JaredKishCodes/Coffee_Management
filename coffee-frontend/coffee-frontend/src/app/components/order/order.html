@@ -1,0 +1,31 @@
+<div class="pt-20 overflow-x-auto rounded-box border border-base-content/5 bg-amber-950 text-amber-50 shadow-lg">
+  <table class="table">
+    <thead class="text-amber-50">
+      <tr>
+        <th>Customer</th>
+        <th>Order Date</th>
+        <th>Order Status</th>
+        <th>Coffee Items</th>
+        <th>Total Net Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+     @for (order of orders; track $index) {
+  <tr>
+    <td>{{ order.customerName }}</td>
+    <td>{{ order.orderDate }}</td>
+    <td>{{ order.orderStatus }}</td>    
+    <td>
+      <ul>
+        @for (item of order.orderItems; track $index) {
+          <li>{{ item.quantity }} x {{ item.coffeeName }} (₱{{ item.unitPrice }})</li>
+        }
+      </ul>
+    </td>
+    <td>{{ order.totalPrice }}</td>
+  </tr>
+}
+
+    </tbody>
+  </table>
+</div>

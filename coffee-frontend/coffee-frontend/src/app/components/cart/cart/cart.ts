@@ -2,10 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CartService } from '../../../services/cart/cart-service';
 import { CartDto } from '../../../models/cart.model';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './cart.html',
   styleUrl: './cart.css'
 })
@@ -42,4 +43,10 @@ export class CartComponent implements OnInit {
       }
     });
   }
+
+  updateTotal() {
+  this.cart.totalPrice = this.cart.cartItems
+    .reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
+}
+
 }

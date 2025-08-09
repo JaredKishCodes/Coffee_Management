@@ -36,6 +36,7 @@ namespace CoffeeManagementSystem.Infrastructure.Auth.Service
             }
 
             var roles = await _userManager.GetRolesAsync(user);
+            var role =  roles.FirstOrDefault();
 
             var token = await _jwtTokenService.CreateTokenAsync(new UserDto
             {
@@ -48,6 +49,7 @@ namespace CoffeeManagementSystem.Infrastructure.Auth.Service
             {   
                 CartId = userCart.Id.ToString(),
                 Token = token,
+                Role = role,
                 Email = user.Email!,
                 FullName = user.FullName
             };

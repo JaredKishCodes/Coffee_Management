@@ -19,8 +19,15 @@ namespace CoffeeManagementSystem.API
             }
 
             // Create Admin User (from appsettings.json or hardcoded)
+            string adminName = configuration["AdminUser:FullName"];
             string adminEmail = configuration["AdminUser:Email"];
             string adminPassword = configuration["AdminUser:Password"];
+
+            if (string.IsNullOrWhiteSpace(adminEmail) || string.IsNullOrWhiteSpace(adminPassword))
+            {
+                Console.WriteLine("[Seed] AdminUser config missing or empty (check appsettings).");
+                return;
+            }
 
             var adminUser = await userManager.FindByEmailAsync(adminEmail);
             if (adminUser == null)
@@ -28,9 +35,12 @@ namespace CoffeeManagementSystem.API
                 var user = new AppUser
                 {
                     UserName = adminEmail,
+                    FullName = adminName,
                     Email = adminEmail,
                     EmailConfirmed = true
                 };
+
+
 
                 var result = await userManager.CreateAsync(user, adminPassword);
                 if (result.Succeeded)
@@ -38,6 +48,14 @@ namespace CoffeeManagementSystem.API
                     await userManager.AddToRoleAsync(user, "Admin");
                 }
             }
+            else
+            {
+                if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
+                {
+                    await userManager.AddToRoleAsync(adminUser, "Admin");
+                }
+            }
+
         }
     }
 }

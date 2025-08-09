@@ -67,6 +67,7 @@ namespace CoffeeManagementSystem.API.Controllers
                     Success = true,
                     Message = "Login successfully.",
                     CartId = response.CartId,
+                    Role = response.Role,
                     Token = response.Token,
                     Email = response.Email,
                     FullName = response.FullName
