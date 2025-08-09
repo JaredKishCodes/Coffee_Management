@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CoffeeInventoryDto } from '../../../models/inventory.model';
 
 @Component({
   selector: 'app-inventory',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './inventory.css'
 })
 export class Inventory {
-
+  coffeeInventory : CoffeeInventoryDto[] = []
 }
