@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { OrderDto } from '../../models/order.model';
+import { OrderDto, OrderStatus } from '../../models/order.model';
 import { OrderService } from '../../services/order/order-service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +15,7 @@ export class Order implements OnInit {
     orderService = inject(OrderService)
 
     orders :OrderDto[] = []
+    OrderStatus = OrderStatus;
 
     ngOnInit(): void {
       this.getAllOrders()
