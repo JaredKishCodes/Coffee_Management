@@ -14,4 +14,8 @@ export class OrderService {
   getAllOrders():Observable<ApiResponse<OrderDto[]>>{
     return this.http.get<ApiResponse<OrderDto[]>>(`${this.apiUrl}/GetAllOrders`);
   }
+
+  updateOrder(id:number): Observable<ApiResponse<OrderDto>>{
+   return this.http.put<ApiResponse<OrderDto>>(`${this.apiUrl}/UpdateOrder/${id}`,{});
+  }
 }
