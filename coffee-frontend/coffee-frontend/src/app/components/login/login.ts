@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Auth } from '../../services/auth/auth';
+import { AuthService } from '../../services/auth/auth';
 import { IAuthResponse, ILogin, IRegister } from '../../models/auth.model';
 import { FormsModule } from '@angular/forms';
 import { Token } from '@angular/compiler';
@@ -17,7 +17,7 @@ export class Login {
   showLoginSuccess: boolean = false;
   showLoginError: boolean = false
 
-  authService = inject(Auth)
+  authService = inject(AuthService)
   router = inject(Router);
 
   registerObj: IRegister = {
@@ -39,7 +39,6 @@ export class Login {
     console.log('Login attempt with:', this.loginObj);
     this.authService.login(this.loginObj).subscribe({
       next: (response: IAuthResponse) => {
-        localStorage.setItem('auth', JSON.stringify(response));
         localStorage.setItem('cartId',response.cartId);
         console.log('Login response:', response);
         console.log('Setting showLoginSuccess to true');

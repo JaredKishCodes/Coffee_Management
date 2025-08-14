@@ -35,10 +35,10 @@
         <li><a routerLink="/coffees">About us</a></li>
         <li><a routerLink="/menu">Menu</a></li>
        
-        @if(user.email == 'admin@gmail.com'){
+        
            <li ><a routerLink="/orders">Orders</a></li>
            <li><a routerLink="/inventory">Inventory</a></li>
-        }
+        
        
          <li><a routerLink="/cart">Cart</a></li>
       </ul>
@@ -46,7 +46,10 @@
 
     <!-- End: Logout -->
     <div class="navbar-end">
-      <button class="btn btn-error" (click)="onLogout()">Logout</button>
+      @if(isLoggedIn){
+          <button class="btn btn-error" (click)="onLogout()">Logout</button>
+      }
+    
     </div>
 
   </div>
