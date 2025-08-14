@@ -10,7 +10,7 @@ export interface IRegister{
     confirmPassword:string;
 }
 
-    export interface IAuthResponse {
+export interface IAuthResponse {
   success: boolean;
   message: string;
   cartId : string;
