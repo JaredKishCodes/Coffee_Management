@@ -29,6 +29,17 @@ export interface CoffeeResponse{
   data: Coffee;
 }
 
+export interface CoffeeRequest{
+  name: string;
+  description: string;
+  price: number;
+  size: 'Small' | 'Medium' | 'Large';
+  stock: number;
+  isAvailable: boolean;
+  imageUrl: string;
+  categoryId: number;
+}
+
 
 export interface CoffeeCategoryApiResponse {
       success: boolean;
