@@ -16,6 +16,7 @@ export class Order implements OnInit {
 
     orders :OrderDto[] = []
     OrderStatus = OrderStatus;
+    coffeeId! : number;
 
     ngOnInit(): void {
       this.getAllOrders()
@@ -33,8 +34,12 @@ export class Order implements OnInit {
       })
     }
 
-    updateOrder(){
-      this.updateOrder()
-    }
+      updateOrder(orderId:number){
+        this.orderService.updateOrder(orderId).subscribe({
+          next:(res)=>{
+            console.log(res);
+          }
+        })
+      }
 
 }
