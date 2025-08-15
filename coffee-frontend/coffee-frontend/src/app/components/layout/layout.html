@@ -33,13 +33,11 @@
       <ul class="menu menu-horizontal px-1 space-x-2">
         <li><a routerLink="/home">Welcome</a></li>
         <li><a routerLink="/coffees">About us</a></li>
-        <li><a routerLink="/menu">Menu</a></li>
-       
-        
+        <li><a routerLink="/menu">Menu</a></li> 
+        @if(role == 'Admin'){
            <li ><a routerLink="/orders">Orders</a></li>
            <li><a routerLink="/inventory">Inventory</a></li>
-        
-       
+             }
          <li><a routerLink="/cart">Cart</a></li>
       </ul>
     </div>

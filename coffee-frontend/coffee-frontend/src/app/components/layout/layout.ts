@@ -14,19 +14,20 @@ export class Layout implements OnInit {
 
   router = inject(Router)
   user! :IAuthResponse;
+  role : string | undefined;
   isLoggedIn = true;
 
   authService = inject(AuthService)
-  userObj: { email: string } = { email: 'dadad' };
-
-
-  
 
   ngOnInit(): void {
+    const userString = localStorage.getItem("auth");
+    const role = userString ? JSON.parse(userString).role : null;
+    this.role = role;
+    
+
     this.authService.isLoggedIn$.subscribe((status)=>{
       this.isLoggedIn = status;
     })
-    console.log(this.userObj.email)
   }
   
 

@@ -7,6 +7,7 @@
         <thead class="text-amber-50">
             <tr class="">
                 <th>Id</th>
+                <th>Category</th>
                 <th>Coffee Item</th>
                 <th>Stocks</th>
                 <th>Is Available</th>
@@ -17,6 +18,7 @@
             @for (inventory of coffeeInventory; track $index) {
             <tr>
                 <td >{{ inventory.id }}</td>
+                <td >{{ inventory.category}}</td>
                 <td>{{ inventory.name }}</td>
                 <td>{{ inventory.stock }}</td>
                 <td>{{ inventory.isAvailable }}</td>
@@ -48,29 +50,35 @@
       <div class="flex flex-col col-span-2">
         <label for="name" class="mb-1 font-medium text-gray-700">Coffee Name</label>
         <input id="name" type="text" placeholder="Enter coffee name" 
-               class="input input-bordered w-full" />
+               class="input input-bordered w-full" name="name" [(ngModel)]="coffeeObj.name" />
       </div>
 
       <!-- Description -->
       <div class="flex flex-col col-span-2">
         <label for="description" class="mb-1 font-medium text-gray-700">Description</label>
         <input id="description" type="text" placeholder="Enter coffee description" 
-               class="input input-bordered w-full" />
+               class="input input-bordered w-full" name="description" [(ngModel)]="coffeeObj.description"  />
       </div>
 
       <!-- Stock -->
       <div class="flex flex-col">
         <label for="stock" class="mb-1 font-medium text-gray-700">Stock</label>
         <input id="stock" type="number" placeholder="Enter stock quantity" 
-               class="input input-bordered w-full" />
+               class="input input-bordered w-full" name="stock" [(ngModel)]="coffeeObj.stock"  />
+      </div>
+
+      <div class="flex flex-col">
+        <label for="price" class="mb-1 font-medium text-gray-700">Price</label>
+        <input id="price" type="number" placeholder="Enter price quantity" 
+               class="input input-bordered w-full" name="price" [(ngModel)]="coffeeObj.price"  />
       </div>
 
       <!-- Is Available -->
       <div class="flex flex-col">
         <label class="mb-1 font-medium text-gray-700">Available</label>
         <div class="flex gap-3">
-          <label><input type="radio" name="isAvailable" value="true" /> Yes</label>
-          <label><input type="radio" name="isAvailable" value="false" /> No</label>
+          <label><input type="radio" name="isAvailable" value="true" name="isAvailable1" [(ngModel)]="coffeeObj.isAvailable"  /> Yes</label>
+          <label><input type="radio" name="isAvailable" value="false" name="isAvailable2" [(ngModel)]="coffeeObj.isAvailable"  /> No</label>
         </div>
       </div>
 
@@ -78,14 +86,14 @@
       <div class="flex flex-col col-span-2">
         <label for="imageUrl" class="mb-1 font-medium text-gray-700">Image URL</label>
         <input id="imageUrl" type="url" placeholder="Enter image URL" 
-               class="input input-bordered w-full" />
+               class="input input-bordered w-full" name="imgUrl" [(ngModel)]="coffeeObj.imageUrl"  />
       </div>
 
       <!-- Category ID -->
       <div class="flex flex-col col-span-2">
         <label for="categoryId" class="mb-1 font-medium text-gray-700">Category ID</label>
         <input id="categoryId" type="number" placeholder="Enter category id" 
-               class="input input-bordered w-full" />
+               class="input input-bordered w-full" name="catID" [(ngModel)]="coffeeObj.categoryId"  />
       </div>
 
       <!-- Submit Button -->
