@@ -44,6 +44,10 @@ export class CartComponent implements OnInit {
     });
   }
 
+  removeItem(id:number){
+    
+  }
+
   updateTotal() {
   this.cart.totalPrice = this.cart.cartItems
     .reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
