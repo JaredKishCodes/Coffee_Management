@@ -20,4 +20,8 @@ export class CartItemService {
  getCartItemById(id: number): Observable<CartItemDto> {
   return this.http.get<CartItemDto>(`${this.apiUrl}/GetCartItemById?id=${id}`);
  }
+
+ removeCartItem(id:number):Observable<boolean>{
+  return this.http.delete<boolean>(`${this.apiUrl}/DeleteCartItem/${id}`)
+ }
 }

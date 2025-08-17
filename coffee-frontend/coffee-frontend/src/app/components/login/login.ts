@@ -43,6 +43,10 @@ export class Login {
         console.log('Login response:', response);
         console.log('Setting showLoginSuccess to true');
         this.showLoginSuccess = true;
+        this.authService.setUser({
+          email:response.email,
+          role:response.role
+        })
         
 
         setTimeout(() => {

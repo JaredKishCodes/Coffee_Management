@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject, from, Observable, tap } from 'rxjs';
 import { IAuthResponse, ILogin, IRegister} from '../../models/auth.model';
 @Injectable({
@@ -9,6 +9,7 @@ export class AuthService {
   apiUrl = 'https://localhost:7168/api/Account/';
 
   private loggedIn = new BehaviorSubject<boolean>(localStorage.getItem('auth')? true : false);
+  user = signal<{email:string,role:string} | null>(null)
 
   isLoggedIn$ = this.loggedIn.asObservable();
 
@@ -24,8 +25,17 @@ export class AuthService {
     );
   }
 
+
   register(creds:IRegister) :Observable<IAuthResponse> {
     return this.http.post<IAuthResponse>(`${this.apiUrl}register`, creds);
+  }
+
+  logout(){
+    this.user.set(null)
+  }
+
+  setUser(user: { email: string; role: string }) {
+    this.user.set(user);
   }
 
 }

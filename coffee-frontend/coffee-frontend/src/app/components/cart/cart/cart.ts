@@ -3,6 +3,7 @@ import { CartService } from '../../../services/cart/cart-service';
 import { CartDto } from '../../../models/cart.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CartItemService } from '../../../services/cart-item/cart-item';
 
 @Component({
   selector: 'app-cart',
@@ -12,10 +13,11 @@ import { FormsModule } from '@angular/forms';
 })
 export class CartComponent implements OnInit {
   cartService = inject(CartService);
+  cartItemService = inject(CartItemService);
 
   cart: CartDto = {
     id: 0,
-    customerName: 'jarwd',
+    customerName: '',
     totalPrice: 0,
     orderDate: '',
     orderStatus: 'Pending',
@@ -45,7 +47,19 @@ export class CartComponent implements OnInit {
   }
 
   removeItem(id:number){
-    
+    this.cartItemService.removeCartItem(id).subscribe({
+      next:(res)=>{
+        const remove = confirm("Remove item?")
+        if(remove){
+          this.getCartById();
+          console.log(res);
+        }
+        
+      },
+      error:err=>{
+        console.error(err)
+      }
+    })
   }
 
   updateTotal() {

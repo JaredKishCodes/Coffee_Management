@@ -39,6 +39,7 @@ export class Layout implements OnInit {
       this.authService['loggedIn'].next(false)
       this.router.navigate(['/login']);
       this.isLoggedIn = false;
+      
 
     }
     

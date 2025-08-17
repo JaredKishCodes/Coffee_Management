@@ -15,6 +15,7 @@ export interface IAuthResponse {
   message: string;
   cartId : string;
   token: string;
+  role: string,
   email: string;
   fullName: string;
 }
