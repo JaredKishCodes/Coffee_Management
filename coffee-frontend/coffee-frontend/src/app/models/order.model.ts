@@ -21,6 +21,16 @@ export interface ApiResponse<T> {
   data: T;
 }
 
+export interface CreateOrderDto{
+  customerName:string,
+  cartItems :CreateOrderItemDto[]
+}
+
+export interface CreateOrderItemDto{
+  coffeeItemId:number;
+  quantity:number;
+}
+
 export enum OrderStatus {
   Pending = 0,
   Processing = 1,

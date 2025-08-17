@@ -14,7 +14,7 @@ namespace CoffeeManagementSystem.Application.Services
             var newOrder = new Order
             {
                 CustomerName = order.CustomerName,
-                OrderItems = order.OrderItems.Select(item => new OrderItem
+                OrderItems = order.CartItems.Select(item => new OrderItem
                 {
                     CoffeeItemId = item.CoffeeItemId,
                     Quantity = item.Quantity,
@@ -110,7 +110,7 @@ namespace CoffeeManagementSystem.Application.Services
             {
                 Id = id,
                 CustomerName = order.CustomerName,
-                OrderItems = order.OrderItems.Select(item => new OrderItem
+                OrderItems = order.CartItems.Select(item => new OrderItem
                 {
                     CoffeeItemId = item.CoffeeItemId,
                     Quantity = item.Quantity,

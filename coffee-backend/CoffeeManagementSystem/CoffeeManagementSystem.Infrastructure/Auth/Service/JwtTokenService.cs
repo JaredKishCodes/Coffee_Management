@@ -39,7 +39,7 @@ namespace CoffeeManagementSystem.Infrastructure.Auth.Service
                 issuer: _configuration["JWT:Issuer"],
                 audience: _configuration["JWT:Audience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddHours(24),
+                expires: DateTime.UtcNow.AddHours(1),
                 signingCredentials: credentials
             );
 

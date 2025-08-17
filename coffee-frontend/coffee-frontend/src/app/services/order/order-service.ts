@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiResponse, OrderDto } from '../../models/order.model';
+import { ApiResponse, CreateOrderDto, OrderDto } from '../../models/order.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class OrderService {
    return this.http.put<ApiResponse<OrderDto>>(`${this.apiUrl}/UpdateOrder/${id}`,{});
   }
 
-  addOrder(){
-    
+  addOrder(order:CreateOrderDto):Observable<OrderDto>{
+    return this.http.post<OrderDto>(`${this.apiUrl}/AddOrder`,order)
   }
 }

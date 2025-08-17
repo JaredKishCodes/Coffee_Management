@@ -4,6 +4,9 @@ import { CartDto } from '../../../models/cart.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CartItemService } from '../../../services/cart-item/cart-item';
+import { OrderService } from '../../../services/order/order-service';
+import { AuthService } from '../../../services/auth/auth';
+import { CreateOrderItemDto } from '../../../models/order.model';
 
 @Component({
   selector: 'app-cart',
@@ -12,8 +15,10 @@ import { CartItemService } from '../../../services/cart-item/cart-item';
   styleUrl: './cart.css'
 })
 export class CartComponent implements OnInit {
+  authService = inject(AuthService);
   cartService = inject(CartService);
   cartItemService = inject(CartItemService);
+  orderService = inject(OrderService);
 
   cart: CartDto = {
     id: 0,
@@ -67,4 +72,14 @@ export class CartComponent implements OnInit {
     .reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
 }
 
+  addOrder(){
+    const orderRequest = {
+      customerName : this.authService.user()?.email ?? 'Guest',
+      cartItems: this.cart.cartItems.map(item =>({
+        coffeeItemId: item.coffeeItemId,
+        quantity: item.quantity,
+      })),
+    };
+    this.orderService.addOrder(orderRequest).subscribe()
+  }
 }
