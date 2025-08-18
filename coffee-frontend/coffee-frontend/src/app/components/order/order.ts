@@ -3,6 +3,7 @@ import { OrderDto, OrderStatus } from '../../models/order.model';
 import { OrderService } from '../../services/order/order-service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CoffeeRequest } from '../../models/coffee.model';
 
 @Component({
   selector: 'app-order',
@@ -17,6 +18,17 @@ export class Order implements OnInit {
     orders :OrderDto[] = []
     OrderStatus = OrderStatus;
     coffeeId! : number;
+
+     coffeeObj: CoffeeRequest = {
+      name: '',
+      description: '',
+      price: 0,
+      size: 'Small',
+      stock: 0,
+      isAvailable: true,
+      imageUrl: '',
+      categoryId: 0
+    };
 
     ngOnInit(): void {
       this.getAllOrders()

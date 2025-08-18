@@ -73,13 +73,21 @@ export class CartComponent implements OnInit {
 }
 
   addOrder(){
+    const auth = localStorage.getItem('auth');
+    if(auth){
+      var user = JSON.parse(auth)
+    }
     const orderRequest = {
-      customerName : this.authService.user()?.email ?? 'Guest',
+      customerName : user.fullName,
       cartItems: this.cart.cartItems.map(item =>({
         coffeeItemId: item.coffeeItemId,
         quantity: item.quantity,
       })),
     };
-    this.orderService.addOrder(orderRequest).subscribe()
+    console.log(orderRequest);
+    this.orderService.addOrder(orderRequest).subscribe({
+      next: res => console.log('Order placed:', res),
+      error: err => console.error('Error placing order:', err),
+    })
   }
 }
