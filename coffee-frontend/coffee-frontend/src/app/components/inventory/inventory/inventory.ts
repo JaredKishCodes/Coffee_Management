@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, Signal } from '@angular/core';
 import { CoffeeInventoryDto } from '../../../models/inventory.model';
 import { InventoryService } from '../../../services/inventory/inventory-service';
 import { CoffeeRequest, CoffeeResponse } from '../../../models/coffee.model';
@@ -13,6 +13,8 @@ import { FormsModule } from '@angular/forms';
 export class Inventory implements OnInit{
 
   addedCoffee?: CoffeeResponse;
+  stock:number = 0;
+  selectedInventoryId: number | null = null;
   
   ngOnInit(): void {
     this.getAllInventory()
@@ -21,6 +23,7 @@ export class Inventory implements OnInit{
   inventoryService = inject(InventoryService)
 
   coffeeInventory : CoffeeInventoryDto[] = []
+  
   
  coffeeObj: CoffeeRequest = {
   name: '',
@@ -68,6 +71,22 @@ export class Inventory implements OnInit{
     categoryId: 0
   };
 }
+
+  openStockModal(inventory: CoffeeInventoryDto) {
+    this.selectedInventoryId = inventory.id;
+    this.stock = inventory.stock;
+    (document.getElementById('my_modal_3') as HTMLDialogElement).showModal();
+  }
+
+  updateStock(){
+    if (this.selectedInventoryId == null) return;
+    this.inventoryService.updateStock(this.selectedInventoryId, { stock: this.stock }).subscribe({
+      next:(res)=>{
+        console.log(res.data);
+        this.getAllInventory();
+      }
+    })
+  }   
 
 
 }

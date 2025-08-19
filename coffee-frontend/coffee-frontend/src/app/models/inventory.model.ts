@@ -5,5 +5,9 @@ export interface CoffeeInventoryDto {
   name: string;
   stock: number;
   isAvailable: boolean;
-  category: Category[]
+  category?: string
+}
+
+export interface UpdateCoffeeStockRequest{
+  stock:number;
 }

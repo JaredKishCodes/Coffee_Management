@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../../models/order.model';
 import { Inventory } from '../../components/inventory/inventory/inventory';
-import { CoffeeInventoryDto } from '../../models/inventory.model';
+import { CoffeeInventoryDto, UpdateCoffeeStockRequest } from '../../models/inventory.model';
 import { CoffeeRequest, CoffeeResponse } from '../../models/coffee.model';
 
 @Injectable({
@@ -22,5 +22,9 @@ export class InventoryService {
 
   addCoffee(coffeeReq:CoffeeRequest):Observable<ApiResponse<CoffeeResponse>>{
     return this.http.post<ApiResponse<CoffeeResponse>>(`${this.coffeeUrl}`,coffeeReq)
+  }
+
+  updateStock(id:number, stockRequest:UpdateCoffeeStockRequest):Observable<ApiResponse<CoffeeInventoryDto>>{
+    return this.http.put<ApiResponse<CoffeeInventoryDto>>(`${this.apiUrl}/UpdateStockAsync/${id}`, stockRequest);
   }
 }
