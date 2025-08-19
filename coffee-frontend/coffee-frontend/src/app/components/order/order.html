@@ -16,7 +16,10 @@
         <td>{{ order.customerName }}</td>
         <td>{{ order.orderDate }}</td>
         <td> <button class="p-2.5 rounded-2xl" [ngClass]="{
-                    'bg-green-500 text-amber-950 font-medium': order.orderStatus === 3,  
+                    'bg-green-300 text-green-900 font-medium': order.orderStatus === 2,  
+                    'bg-blue-300 text-blue-900 font-medium': order.orderStatus === 1, 
+                    'bg-red-300 text-red-900 font-medium': order.orderStatus === 3,  
+                
                     'bg-amber-200 text-amber-950': order.orderStatus !== 1
                      }">{{ OrderStatus[order.orderStatus] }}</button></td>
         <td>
@@ -26,7 +29,7 @@
             }
           </ul>
         </td>
-        <td class="text-amber-400">{{ order.totalPrice }}</td>
+        <td class="text-amber-400" readonly >{{ order.totalPrice }}</td>
         <td class="flex space-x-3">
           <!-- Delete icon -->
           <span (click)="deleteOrder(order.id)" class="p-1 rounded-lg cursor-pointer text-red-500 transition duration-200 
@@ -70,12 +73,6 @@
           [(ngModel)]="orderObj.customerName" />
       </div>
 
-      <!-- Total Price -->
-      <div class="flex flex-col col-span-2">
-        <label for="totalPrice" class="mb-1 font-medium text-gray-700">Total Price</label>
-        <input id="totalPrice" type="text" placeholder="Enter total price" class="input input-bordered w-full"
-          name="totalPrice" [(ngModel)]="orderObj.totalPrice" />
-      </div>
 
       <!-- Stock -->
       <div class="flex flex-col">

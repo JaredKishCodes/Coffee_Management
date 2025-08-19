@@ -72,11 +72,11 @@ export class Order implements OnInit {
 
 
   updateOrder() {
+    const total = this.orderObj.orderItems
+    .reduce((sum, item) => sum + (item.quantity * (item.unitPrice ?? 0)), 0);
   const updateOrderDto = {
-      
     customerName: this.orderObj.customerName,
-    totalPrice: this.orderObj.totalPrice,
-     orderDate: new Date(this.orderObj.orderDate).toISOString(),
+     totalPrice: total,
     orderStatus: this.orderObj.orderStatus,
     orderItems: this.orderObj.orderItems.map(item => ({
       coffeeItemId: item.coffeeItemId,
