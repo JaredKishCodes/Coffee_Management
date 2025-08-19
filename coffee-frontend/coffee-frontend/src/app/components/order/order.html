@@ -80,7 +80,7 @@
       <!-- Stock -->
       <div class="flex flex-col">
         <label for="orderdedDate" class="mb-1 font-medium text-gray-700">Ordered Date</label>
-        <input id="orderdedDate" type="datetime" placeholder="Enter ordered date" class="input input-bordered w-full"
+        <input id="orderdedDate" type="datetime-local" placeholder="Enter ordered date" class="input input-bordered w-full"
           name="orderdedDate" [(ngModel)]="orderObj.orderDate" />
       </div>
 
@@ -88,10 +88,10 @@
         <label class="mb-1 font-medium text-gray-700">Order Status</label>
         <select [(ngModel)]="orderObj.orderStatus" name="orderStatus"
                 class="select select-bordered" required>
-          <option [value]="'Pending'">Pending</option>
-          <option [value]="'Processing'">Processing</option>
-          <option [value]="'Completed'">Completed</option>
-          <option [value]="'Cancelled'">Cancelled</option>
+          <option [ngValue]="0">Pending</option>
+          <option [ngValue]="1">Processing</option>
+          <option [ngValue]="2">Completed</option>
+          <option [ngValue]="3">Cancelled</option>
         </select>
       </div>
 

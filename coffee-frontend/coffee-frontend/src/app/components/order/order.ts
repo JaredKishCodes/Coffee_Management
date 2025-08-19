@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { OrderDto, OrderStatus } from '../../models/order.model';
+import { ApiResponse, OrderDto, OrderStatus } from '../../models/order.model';
 import { OrderService } from '../../services/order/order-service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -73,18 +73,25 @@ export class Order implements OnInit {
 
   updateOrder() {
   const updateOrderDto = {
+      
     customerName: this.orderObj.customerName,
     totalPrice: this.orderObj.totalPrice,
-    orderDate: this.orderObj.orderDate,
+     orderDate: new Date(this.orderObj.orderDate).toISOString(),
     orderStatus: this.orderObj.orderStatus,
-    orderItems: this.orderObj.orderItems
+    orderItems: this.orderObj.orderItems.map(item => ({
+      coffeeItemId: item.coffeeItemId,
+      quantity: item.quantity
+    }))
   };
 
   this.orderService.updateOrder(this.orderObj.id, updateOrderDto).subscribe({
     next: (res) => {
-      console.log("Order updated", res);
+      console.log("Updating with:",updateOrderDto)
+      this.getAllOrders()
+      console.log("Order updated", res.data);
     },
     error: (err) => {
+      console.log("Updating with:",updateOrderDto)
       console.error("Update failed", err);
     }
   });

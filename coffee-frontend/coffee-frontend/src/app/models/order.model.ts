@@ -22,8 +22,11 @@ export interface ApiResponse<T> {
 }
 
 export interface CreateOrderDto{
-  customerName:string,
-  orderItems :CreateOrderItemDto[]
+  customerName: string,
+  totalPrice?: number,
+  orderDate?: string,
+  orderStatus?: OrderStatus,
+  orderItems: CreateOrderItemDto[]
 }
 
 export interface CreateOrderItemDto{

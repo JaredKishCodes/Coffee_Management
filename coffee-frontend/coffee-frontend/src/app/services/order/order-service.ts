@@ -16,11 +16,11 @@ export class OrderService {
   }
 
   updateOrder(id:number,updateOrderDto:CreateOrderDto): Observable<ApiResponse<OrderDto>>{
-   return this.http.put<ApiResponse<OrderDto>>(`${this.apiUrl}/UpdateOrder/${id}`,{updateOrderDto});
+   return this.http.put<ApiResponse<OrderDto>>(`${this.apiUrl}/UpdateOrder/${id}`, updateOrderDto);
   }
 
-  addOrder(order:CreateOrderDto):Observable<OrderDto>{
-    return this.http.post<OrderDto>(`${this.apiUrl}/AddOrder`,order)
+  addOrder(order:CreateOrderDto):Observable<ApiResponse<OrderDto>>{
+    return this.http.post<ApiResponse<OrderDto>>(`${this.apiUrl}/AddOrder`,order)
   }
 
   deleteOrder(id : number) : Observable<ApiResponse<OrderDto>>{
