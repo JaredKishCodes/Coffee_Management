@@ -20,6 +20,8 @@ export class CartComponent implements OnInit {
   cartItemService = inject(CartItemService);
   orderService = inject(OrderService);
 
+  showCheckoutSuccess : boolean = false;
+
   cart: CartDto = {
     id: 0,
     customerName: '',
@@ -86,8 +88,15 @@ export class CartComponent implements OnInit {
     };
     console.log(orderRequest);
     this.orderService.addOrder(orderRequest).subscribe({
-      next: res => console.log('Order placed:', res),
+      
+      next: (res) =>{console.log('Order placed:', res)
+        this.showCheckoutSuccess = true
+        setTimeout(()=>{
+          this.showCheckoutSuccess = false
+        },3000);
+      },
       error: err => console.error('Error placing order:', err),
     })
-  }
+  
+}
 }

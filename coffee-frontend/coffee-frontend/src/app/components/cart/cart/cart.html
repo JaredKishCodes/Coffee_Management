@@ -1,3 +1,17 @@
+@if (showCheckoutSuccess) {
+  <ng-container [ngTemplateOutlet]="registerSuccess"></ng-container>
+}
+
+<ng-template #registerSuccess>
+  <div class="toast toast-top toast-center pt-17">
+    <div class="alert alert-success">
+      <span>Thank you! Your order has been placed successfully.</span>
+    </div>
+  </div>
+</ng-template>
+
+
+
 <div class="bg-amber-950 w-screen min-h-screen p-4 md:p-20">
   <div class="container mx-auto pt-10 text-black">
     <!-- Two cards side by side on desktop, stacked on mobile -->

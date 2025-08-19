@@ -53,7 +53,7 @@ export class Login {
           console.log('Hiding login success alert');
           this.showLoginSuccess = false;
           this.router.navigateByUrl('/menu');
-        }, 2000); // Increased from 2000 to 4000ms
+        }, 2000); 
       },
       error: (error) => {
         console.log('Login error, setting showLoginError to true');
@@ -62,7 +62,7 @@ export class Login {
         setTimeout(() => {
           console.log('Hiding login error alert');
           this.showLoginError = false;
-        }, 4000); // Increased from 2000 to 4000ms
+        }, 4000); 
         console.error('Login failed', error);
       }
     });

@@ -42,7 +42,7 @@ namespace CoffeeManagementSystem.API.Controllers
             });
         }
         [Authorize(Roles = "Admin,Customer,Staff")]
-        [HttpGet("GetOrderById/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<ApiResponse<OrderDto>>> GetOrderByIdAsync(int id)
         {
             var order = await _orderService.GetOrderByIdAsync(id);
@@ -87,7 +87,7 @@ namespace CoffeeManagementSystem.API.Controllers
                     Data = null
                 });
             }
-            return CreatedAtAction(nameof(GetOrderByIdAsync), new { id = newOrder.Id },
+            return StatusCode(StatusCodes.Status201Created,
                 new ApiResponse<OrderDto>
                 {
                     Success = true, 
