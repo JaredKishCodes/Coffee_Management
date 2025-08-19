@@ -14,7 +14,7 @@ namespace CoffeeManagementSystem.Application.Services
             var newOrder = new Order
             {
                 CustomerName = order.CustomerName,
-                OrderItems = order.CartItems.Select(item => new OrderItem
+                OrderItems = order.OrderItems.Select(item => new OrderItem
                 {
                     CoffeeItemId = item.CoffeeItemId,
                     Quantity = item.Quantity,
@@ -110,7 +110,10 @@ namespace CoffeeManagementSystem.Application.Services
             {
                 Id = id,
                 CustomerName = order.CustomerName,
-                OrderItems = order.CartItems.Select(item => new OrderItem
+                TotalPrice = order.TotalPrice,
+                OrderDate = order.OrderDate,
+                OrderStatus = order.OrderStatus,
+                OrderItems = order.OrderItems.Select(item => new OrderItem
                 {
                     CoffeeItemId = item.CoffeeItemId,
                     Quantity = item.Quantity,
@@ -123,8 +126,7 @@ namespace CoffeeManagementSystem.Application.Services
             }
 
             existingOrder.TotalPrice = existingOrder.OrderItems.Sum(i => i.Quantity * i.UnitPrice);
-            existingOrder.OrderDate = DateTime.UtcNow;
-            existingOrder.OrderStatus = OrderStatus.Pending;
+            
             var updatedOrder = await _orderRepo.UpdateOrderAsync(existingOrder);
 
             return new OrderDto

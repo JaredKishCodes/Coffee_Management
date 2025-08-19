@@ -54,14 +54,14 @@ export class CartComponent implements OnInit {
   }
 
   removeItem(id:number){
+     const remove = confirm("Remove item?")
+        if(!remove){
+          return;
+        }        
     this.cartItemService.removeCartItem(id).subscribe({
       next:(res)=>{
-        const remove = confirm("Remove item?")
-        if(remove){
           this.getCartById();
           console.log(res);
-        }
-        
       },
       error:err=>{
         console.error(err)
@@ -81,7 +81,7 @@ export class CartComponent implements OnInit {
     }
     const orderRequest = {
       customerName : user.fullName,
-      cartItems: this.cart.cartItems.map(item =>({
+      orderItems: this.cart.cartItems.map(item =>({
         coffeeItemId: item.coffeeItemId,
         quantity: item.quantity,
       })),

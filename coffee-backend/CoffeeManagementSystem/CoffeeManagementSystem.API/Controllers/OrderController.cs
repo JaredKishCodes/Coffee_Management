@@ -127,7 +127,7 @@ namespace CoffeeManagementSystem.API.Controllers
                 Data = updatedOrder
             });
         }
-        [Authorize(Roles = "Admin,Customer,Staff")]
+        [Authorize(Roles = "Admin,Staff")]
         [HttpDelete("DeleteOrder/{id}")]
         public async Task<ActionResult<ApiResponse<OrderDto>>> DeleteOrder(int id)
         {
@@ -135,7 +135,7 @@ namespace CoffeeManagementSystem.API.Controllers
             if (order == null)
             {
                 return NotFound(
-                    new ApiResponse<IEnumerable<OrderDto>>
+                    new ApiResponse<OrderDto>
                     {
                         Success = false,
                         Message = "Order not found",

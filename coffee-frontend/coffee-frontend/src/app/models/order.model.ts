@@ -23,7 +23,7 @@ export interface ApiResponse<T> {
 
 export interface CreateOrderDto{
   customerName:string,
-  cartItems :CreateOrderItemDto[]
+  orderItems :CreateOrderItemDto[]
 }
 
 export interface CreateOrderItemDto{
