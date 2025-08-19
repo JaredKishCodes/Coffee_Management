@@ -5,5 +5,5 @@ export interface CoffeeInventoryDto {
   name: string;
   stock: number;
   isAvailable: boolean;
-  category: Category
+  category: Category[]
 }

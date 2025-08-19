@@ -11,7 +11,7 @@ namespace CoffeeManagementSystem.Infrastructure.Repositories
     {
         public async Task<IEnumerable<CoffeeItem>> GetAllInventoryAsync()
         {
-           return await _context.CoffeeItems.ToListAsync();
+           return await _context.CoffeeItems.Include(x => x.Category).ToListAsync();
         }
 
         public async Task<IEnumerable<CoffeeItem>> GetInventoryByCategoryAsync(int categoryId)

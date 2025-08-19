@@ -121,9 +121,17 @@ namespace CoffeeManagementSystem.Application.Services
             };
             foreach (var item in existingOrder.OrderItems)
             {
+                if (item.CoffeeItemId == 0)
+                    throw new Exception("CoffeeItemId is missing in order item");
+
                 var coffee = await _coffeeItemRepo.GetCoffeeItemByIdAsync(item.CoffeeItemId);
+                if (coffee == null)
+                    throw new Exception($"Coffee item with ID {item.CoffeeItemId} not found.");
+
                 item.UnitPrice = coffee.Price;
             }
+
+
 
             existingOrder.TotalPrice = existingOrder.OrderItems.Sum(i => i.Quantity * i.UnitPrice);
             

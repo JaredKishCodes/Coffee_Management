@@ -15,6 +15,7 @@ namespace CoffeeManagementSystem.Application.Services
             return items.Select(x => new CoffeeInventoryDto
             {
                 Id = x.Id,
+                Category = x.Category.Name,
                 Name = x.Name,
                 Stock = x.Stock,
                 IsAvailable = x.IsAvailable
