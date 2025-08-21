@@ -10,57 +10,22 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './inventory.html',
   styleUrl: './inventory.css'
 })
-export class Inventory implements OnInit{
+export class Inventory implements OnInit {
 
   addedCoffee?: CoffeeResponse;
-  stock:number = 0;
+  stock: number = 0;
   selectedInventoryId: number | null = null;
-  
+
   ngOnInit(): void {
     this.getAllInventory()
   }
 
   inventoryService = inject(InventoryService)
 
-  coffeeInventory : CoffeeInventoryDto[] = []
-  
-  
- coffeeObj: CoffeeRequest = {
-  name: '',
-  description: '',
-  price: 0,
-  size: 'Small',
-  stock: 0,
-  isAvailable: true,
-  imageUrl: '',
-  categoryId: 0
-};
+  coffeeInventory: CoffeeInventoryDto[] = []
 
 
-
-  addCoffee(){
-    this.inventoryService.addCoffee(this.coffeeObj).subscribe({
-      next:(res)=>{
-        this.addedCoffee = res.data
-        this.resetCoffeeObj();
-      },
-      error:err =>{
-        console.log(err)
-      }  
-    })
-    
-  }
-
-  getAllInventory(){
-    this.inventoryService.getAllInventory().subscribe({
-      next:(res)=>{
-        this.coffeeInventory = res.data
-      }
-    })
-  }
-
-  resetCoffeeObj() {
-  this.coffeeObj = {
+  coffeeObj: CoffeeRequest = {
     name: '',
     description: '',
     price: 0,
@@ -70,7 +35,42 @@ export class Inventory implements OnInit{
     imageUrl: '',
     categoryId: 0
   };
-}
+
+
+
+  addCoffee() {
+    this.inventoryService.addCoffee(this.coffeeObj).subscribe({
+      next: (res) => {
+        this.addedCoffee = res.data
+        this.resetCoffeeObj();
+      },
+      error: err => {
+        console.log(err)
+      }
+    })
+
+  }
+
+  getAllInventory() {
+    this.inventoryService.getAllInventory().subscribe({
+      next: (res) => {
+        this.coffeeInventory = res.data
+      }
+    })
+  }
+
+  resetCoffeeObj() {
+    this.coffeeObj = {
+      name: '',
+      description: '',
+      price: 0,
+      size: 'Small',
+      stock: 0,
+      isAvailable: true,
+      imageUrl: '',
+      categoryId: 0
+    };
+  }
 
   openStockModal(inventory: CoffeeInventoryDto) {
     this.selectedInventoryId = inventory.id;
@@ -78,15 +78,15 @@ export class Inventory implements OnInit{
     (document.getElementById('my_modal_3') as HTMLDialogElement).showModal();
   }
 
-  updateStock(){
+  updateStock() {
     if (this.selectedInventoryId == null) return;
     this.inventoryService.updateStock(this.selectedInventoryId, { stock: this.stock }).subscribe({
-      next:(res)=>{
+      next: (res) => {
         console.log(res.data);
         this.getAllInventory();
       }
     })
-  }   
+  }
 
 
 }

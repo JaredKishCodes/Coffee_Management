@@ -26,4 +26,8 @@ export class OrderService {
   deleteOrder(id : number) : Observable<ApiResponse<OrderDto>>{
     return this.http.delete<ApiResponse<OrderDto>>(`${this.apiUrl}/DeleteOrder/${id}`)
   }
+
+  getOrderByid(orderId:number) :Observable<ApiResponse<OrderDto>>{
+    return this.http.get<ApiResponse<OrderDto>>(`${this.apiUrl}/${orderId}`)
+  }
 }
