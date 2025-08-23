@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CartItemService } from '../../../services/cart-item/cart-item';
 import { OrderService } from '../../../services/order/order-service';
 import { AuthService } from '../../../services/auth/auth';
-import { CreateOrderItemDto, OrderDto } from '../../../models/order.model';
+import { CreateOrderItemDto, OrderDto, OrderStatus } from '../../../models/order.model';
 import Swal from 'sweetalert2';
 import { reduce } from 'rxjs';
 
@@ -26,6 +26,7 @@ export class CartComponent implements OnInit {
   showCheckoutSuccess: boolean = false;
 
   orders : OrderDto[] = []
+  OrderStatus = OrderStatus;
 
   cart: CartDto = {
     id: 0,

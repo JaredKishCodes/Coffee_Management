@@ -10,15 +10,12 @@
   </div>
 </ng-template>
 
-
-
 <div class="bg-amber-950 w-screen min-h-screen p-4 md:p-20">
   <div class="container mx-auto pt-10 text-black">
-    <!-- Two cards side by side on desktop, stacked on mobile -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
       <!-- Left Card: Cart Items -->
-      <div class=" col-span-2 rounded-lg border border-base-content/5 bg-base-100 p-6 shadow">
+      <div class="col-span-2 rounded-lg border border-base-content/5 bg-base-100 p-6 shadow">
         <h1 class="flex justify-center text-3xl font-bold text-amber-800 pb-6">
           My Cart
         </h1>
@@ -33,99 +30,114 @@
               <th>Total</th>
             </tr>
           </thead>
-         <tbody>
-  @for (item of cart.cartItems; track $index) {
-  <tr>
-    <td>
-      <img src="{{item.coffeeItemImg}}" alt="Coffee Image" 
-           class="w-20 h-20 object-cover rounded ml-3" />
-    </td>
-    <td>{{ item.coffeeName }}</td>
-    <td>{{ item.unitPrice }}</td>
-    <td>
-      <input type="number" [(ngModel)]="item.quantity" 
-             (ngModelChange)="updateTotal()" min="1"
-             class="w-16 border rounded text-center" />
-    </td>
-
-    <td class="flex justify-between  mt-6">
-      {{ item.unitPrice * item.quantity }}
-      <span class="ml-6" (click)="removeItem(item.id)">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
-             viewBox="0 0 24 24" stroke-width="1.5"
-             stroke="currentColor" 
-             class="size-6 text-red-500 cursor-pointer hover:text-red-700">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-        </svg>
-      </span>
-    </td>
-  </tr>
-  }
-</tbody>
-
+          <tbody>
+            @for (item of cart.cartItems; track $index) {
+              <tr>
+                <td>
+                  <img src="{{item.coffeeItemImg}}" 
+                       alt="Coffee Image" 
+                       class="w-20 h-20 object-cover rounded ml-3" />
+                </td>
+                <td>{{ item.coffeeName }}</td>
+                <td>₱{{ item.unitPrice }}</td>
+                <td>
+                  <input type="number" [(ngModel)]="item.quantity" 
+                        (ngModelChange)="updateTotal()" min="1"
+                        class="w-16 border rounded text-center" />
+                </td>
+                <td class="flex justify-between mt-6">
+                  ₱{{ item.unitPrice * item.quantity }}
+                  <span class="ml-6" (click)="removeItem(item.id)">
+                    <svg xmlns="http://www.w3.org/2000/svg" 
+                         viewBox="0 0 24 24" 
+                         fill="none" stroke="currentColor"
+                         stroke-width="1.5" 
+                         class="size-6 text-red-500 cursor-pointer hover:text-red-700">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                    </svg>
+                  </span>
+                </td>
+              </tr>
+            }
+          </tbody>
         </table>
       </div>
 
-      <!-- Right Card: Cart Totals -->
-      <div class="rounded-lg border border-base-content/5 bg-base-100 p-6 shadow w-90">
-        <h2 class="text-xl font-bold mb-4">Cart Totals</h2>
-        <div class="flex justify-between border-b pb-2 mb-2">
-          <span>Subtotal:</span>
-          <span>{{ cart.totalPrice }}</span>
-          <span>OrderDate:</span>
-          <span>{{ cart.orderDate }}</span>
-        </div>
-        <div class="flex justify-between font-bold text-lg">
-          <span>Total:</span>
-          <span>{{ cart.totalPrice }}</span>
-        </div>
-        <button (click)="addOrder()" class="btn btn-active btn-success ">Checkout</button>
+      <!-- Right Column: Totals + Order Tracker -->
+      <div class="flex flex-col gap-6">
         
+        <!-- Cart Totals -->
+        <div class="rounded-lg border border-base-content/5 bg-base-100 p-6 shadow">
+          <h2 class="text-xl font-bold mb-4">Cart Totals</h2>
+          <div class="flex justify-between border-b pb-2 mb-2">
+            <span>Subtotal:</span>
+            <span>₱{{ cart.totalPrice }}</span>
+          </div>
+          <div class="flex justify-between font-bold text-lg">
+            <span>Total:</span>
+            <span>₱{{ cart.totalPrice }}</span>
+          </div>
+          <button (click)="addOrder()" class="btn btn-active btn-success w-full mt-4">
+            Checkout
+          </button>
+        </div>
+
+        <!-- Order Tracker -->
+        <div class="rounded-lg border border-base-content/5 bg-base-100 p-6 shadow">
+          <h2 class="text-xl font-bold mb-4">My Orders</h2>
+
+          @for (order of orders; track $index) {
+            <div class="mb-6 p-4 rounded-xl shadow-md bg-amber-100 border">
+              
+              <div class="flex justify-between items-center">
+                <h2 class="text-lg font-semibold">Order ID {{ order.id }}</h2>
+                <span class="px-4 py-2 rounded-full text-sm font-medium"
+                  [ngClass]="{
+                    'bg-amber-900 text-amber-100': order.orderStatus === 0,
+                    'bg-blue-100 text-blue-800': order.orderStatus === 1,
+                    'bg-green-100 text-green-800': order.orderStatus === 2,
+                    'bg-red-100 text-red-800': order.orderStatus === 3
+                  }">
+                  {{ OrderStatus[order.orderStatus] }}
+                </span>
+              </div>
+
+              <p class="text-black-950 mt-1">Customer: {{ order.customerName }}</p>
+              <p class="text-gray-950">Date: {{ order.orderDate | date:'medium' }}</p>
+              <p class="text-gray-950 font-semibold mt-2">Total: ₱{{ order.totalPrice }}</p>
+
+              <!-- Progress Tracker -->
+              <div class="mt-4 flex items-center justify-between">
+                <div class="flex-1 h-2 rounded bg-gray-200">
+                  <div 
+                    class="h-2 rounded bg-green-500 transition-all duration-500"
+                    [style.width]="
+                      order.orderStatus === 0 ? '25%' :
+                      order.orderStatus === 1 ? '50%' :
+                      order.orderStatus === 2 ? '100%' : '100%'
+                    ">
+                  </div>
+                </div>
+                <span class="ml-3 text-sm font-medium text-gray-600">
+                  {{ order.orderStatus }}
+                </span>
+              </div>
+
+              <div class="mt-3">
+                <h3 class="text-sm font-bold mb-1">Items:</h3>
+                <ul class="text-sm list-disc list-inside">
+                  @for (item of order.orderItems; track $index) {
+                    <li>
+                      {{ item.coffeeName }} (x{{ item.quantity }}) - ₱{{ item.total }}
+                    </li>
+                  }
+                </ul>
+              </div>
+            </div>
+          }
+        </div>
       </div>
-
-      <div class="p-6">
-        <h1 class="text-2xl font-bold mb-4">My Orders</h1>
-
-  @for (order of orders; track $index) {
-    <div 
-       class="mb-6 p-4 rounded-xl shadow-md bg-white border">
-
-    <div class="flex justify-between items-center">
-      <h2 class="text-lg font-semibold">Order #{{ order.id }}</h2>
-      <span class="px-3 py-1 rounded-full text-sm font-medium"
-        [ngClass]="{
-          'bg-yellow-100 text-yellow-800': order.orderStatus === 0,
-          'bg-blue-100 text-blue-800': order.orderStatus === 1,
-          'bg-green-100 text-green-800': order.orderStatus === 2,
-          'bg-red-100 text-red-800': order.orderStatus === 3
-        }">
-        {{ order.orderStatus }}
-      </span>
-    </div>
-
-    <p class="text-gray-600 mt-1">Customer: {{ order.customerName }}</p>
-    <p class="text-gray-600">Date: {{ order.orderDate | date:'medium' }}</p>
-    <p class="text-gray-800 font-semibold mt-2">Total: ₱{{ order.totalPrice }}</p>
-
-    <div class="mt-3">
-      <h3 class="text-sm font-bold mb-1">Items:</h3>
-      <ul class="text-sm list-disc list-inside">
-        @for (item of order.orderItems; track $index) {
-          <li>
-          {{ item.coffeeName }} (x{{ item.quantity }}) - ₱{{ item.total }}
-        </li>
-        }
-        
-      </ul>
-    </div>
-  </div>
-  }
-  
-  
-</div>
-
-
     </div>
   </div>
 </div>

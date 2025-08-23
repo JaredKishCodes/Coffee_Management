@@ -13,12 +13,14 @@ namespace CoffeeManagementSystem.Infrastructure.Auth.Service
         private readonly UserManager<AppUser> _userManager;
         private readonly IJwtTokenService _jwtTokenService;
         private readonly ICartRepo _cartRepo;
+        private readonly IOrderRepo _orderRepo;
 
-        public AuthService(UserManager<AppUser> userManager, IJwtTokenService jwtTokenService,ICartRepo cartRepo)
+        public AuthService(UserManager<AppUser> userManager, IJwtTokenService jwtTokenService,ICartRepo cartRepo,IOrderRepo orderRepo)
         {
             _userManager = userManager;
             _jwtTokenService = jwtTokenService;
             _cartRepo = cartRepo;
+            _orderRepo = orderRepo;
         }
 
         public async Task<LoginResponse> LoginAsync(LoginDto loginDto)
@@ -29,6 +31,7 @@ namespace CoffeeManagementSystem.Infrastructure.Auth.Service
                 throw new UnauthorizedAccessException("Invalid credentials");
 
             var userCart= await _cartRepo.GetCartByUserIdAsync(user.Id);
+            
 
           if(userCart == null)
             {
